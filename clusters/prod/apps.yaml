@@ -12,5 +12,5 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./apps/media
+  path: ./apps/prod/media
   prune: false
