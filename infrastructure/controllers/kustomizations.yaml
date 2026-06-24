@@ -8,3 +8,6 @@ resources:
   - ./cert-manager
   - ./metrics-server
   - ./nginx-ingress
+  - ./cloudnative-pg
+  - ./external-dns
+  - ./external-secrets
