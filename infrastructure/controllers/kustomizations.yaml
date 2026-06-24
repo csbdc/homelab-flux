@@ -3,8 +3,8 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - metallb
-  - longhorn
-  - cert-manager
-  - metrics-server
-  - nginx-ingress
+  - ./metallb
+  - ./longhorn
+  - ./cert-manager
+  - ./metrics-server
+  - ./nginx-ingress
