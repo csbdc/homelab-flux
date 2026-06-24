@@ -4,7 +4,7 @@ metadata:
   name: controllers
   namespace: default
 spec:
-  interval: 1m
+  interval: 30s
   timeout: 5m
   sourceRef:
     kind: GitRepository
@@ -19,7 +19,7 @@ metadata:
   name: configs
   namespace: default
 spec:
-  interval: 1m
+  interval: 30s
   timeout: 5m
   dependsOn:
     - name: controllers
