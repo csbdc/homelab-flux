@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: seerr
+  name: seerr-prod-media-deployment
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seerr
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: seerr
+    spec:  
+      securityContext:
+        fsGroup: 10000
+        runAsGroup: 10000
+        runAsNonRoot: true
+        runAsUser: 10000
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
+      containers:
+      - securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+        image: ghcr.io/seerr-team/seerr
+        name: seerr
+        ports:
+          - containerPort: 5055
+            name: http
+            protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 250Mi
+        volumeMounts:
+        - name: data
+          mountPath: /app/config
+          readOnly: false
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: seerr-prod-media-pvc

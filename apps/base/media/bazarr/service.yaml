@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bazarr-prod-media-svc
+  namespace: media
+spec:
+  selector:
+    app: bazarr
+  ports:
+    - port: 6767
+      targetPort: http
+      name: http
+      protocol: TCP

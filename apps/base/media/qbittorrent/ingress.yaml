@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent-prod-media-ingress
+  namespace: media
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "qbittorrent-0.cbxon.local"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: qbittorrent-prod-media-svc-0
+            port:
+              number: 8080
+  - host: "qbittorrent-1.cbxon.local"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: qbittorrent-prod-media-svc-1
+            port:
+              number: 8080
+  - host: "qbittorrent-2.cbxon.local"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: qbittorrent-prod-media-svc-2
+            port:
+              number: 8080

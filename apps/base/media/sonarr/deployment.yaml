@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarr
+  name: sonarr-prod-media-deployment
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      securityContext:
+        fsGroup: 10000
+        runAsGroup: 10000
+        runAsNonRoot: true
+        runAsUser: 10000
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
+      containers:
+      - securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+        image: ghcr.io/csbdc/sonarr:main
+        name: sonarr
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8989
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 8989
+          initialDelaySeconds: 20
+          periodSeconds: 3
+        env:
+          - name: PGID
+            value: "1000"
+          - name: PUID
+            value: "1000"
+        ports:
+          - containerPort: 8989
+            name: http
+            protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 250Mi
+        volumeMounts:
+        - name: app-data
+          mountPath: /config
+        - name: media-data
+          mountPath: /tv
+        - name: downloads
+          mountPath: /downloads
+      volumes:
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: sonarr-prod-media-pvc
+      - name: media-data
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/tv
+      - name: downloads
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/downloads

@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: radarr
+  name: radarr-prod-media-deployment
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      securityContext:
+        fsGroup: 10000
+        runAsGroup: 10000
+        runAsNonRoot: true
+        runAsUser: 10000
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
+      containers:
+      - securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+        image: ghcr.io/csbdc/radarr:main
+        name: radarr
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 7878
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 7878
+          initialDelaySeconds: 20
+          periodSeconds: 3
+        ports:
+          - containerPort: 7878
+            name: http
+            protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 250Mi
+        volumeMounts:
+        - name: app-data
+          mountPath: /config
+        - name: media-data
+          mountPath: /movies
+        - name: downloads
+          mountPath: /downloads
+      volumes:
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: radarr-prod-media-pvc
+      - name: media-data
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/movies
+      - name: downloads
+        nfs:
+          server: 192.168.10.197
+          path: /srv/nfs/downloads

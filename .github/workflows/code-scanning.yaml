@@ -1,0 +1,31 @@
+name: Code Scanning
+permissions:
+  security-events: write
+  contents: read
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+    sast:
+        runs-on: ubuntu-latest
+        name: kics
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+        steps:
+            - uses: actions/checkout@v6.0.2
+            - run: mkdir -p results-dir
+            - name: run kics Scan
+              uses: checkmarx/kics-action@v2.1.20
+              with:
+                path: '*'
+                output_path: results-dir
+                ignore_on_exit: results
+                output_formats: 'sarif'
+            - name: Upload SARIF file
+              uses: github/codeql-action/upload-sarif@v4.35.2
+              with:
+                sarif_file: results-dir/results.sarif

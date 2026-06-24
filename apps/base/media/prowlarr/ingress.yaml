@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prowlarr-prod-media-ingress
+  namespace: media
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "prowlarr.cbxon.local"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: prowlarr-prod-media-svc
+            port:
+              number: 9696
