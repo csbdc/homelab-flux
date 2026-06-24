@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: metallb
+  name: controllers
   namespace: default
 spec:
   interval: 1m
@@ -10,20 +10,22 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./infrastructure/metallb
+  path: ./infrastructure/controllers
   prune: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: longhorn
+  name: configs
   namespace: default
 spec:
   interval: 1m
   timeout: 5m
+  dependsOn:
+    - name: controllers
   sourceRef:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./infrastructure/longhorn
+  path: ./infrastructure/configs/prod
   prune: false

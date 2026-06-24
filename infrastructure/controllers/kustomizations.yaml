@@ -3,7 +3,8 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - namespace
-  - helmRepository.yaml
-  - helmRelease.yaml
-  - clusterIssuer.yaml
+  - metallb
+  - longhorn
+  - cert-manager
+  - metrics-server
+  - nginx-ingress

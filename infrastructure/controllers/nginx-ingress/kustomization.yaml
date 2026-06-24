@@ -3,8 +3,6 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - namespace.yaml
+  - namespace
   - helmRepository.yaml
   - helmRelease.yaml
-  - ipAddressPool.yaml
-  - l2Advertisement.yaml
