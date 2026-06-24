@@ -8,6 +8,7 @@ resources:
   - service.yaml
   - configMap.yaml
   - postgres.yaml
-  - valkey.yaml
+  - helmRepository.yaml
+  - helmRelease.yaml
   - deployment.yaml
   - ingress.yaml
