@@ -9,8 +9,7 @@ spec:
   dependsOn:
     - name: configs
   sourceRef:
-    kind: GitRepository
-    name: homelab-github-flux-sync
-    namespace: flux-system
-  path: ./apps/prod/media
+    kind: ExternalArtifact
+    name: apps
+  path: ./production/media
   prune: false
