@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: qbittorrent-prod-media-config
-  namespace: media
+  namespace: media-ingest
 data:
   qBittorrent.conf: |
     [Application]

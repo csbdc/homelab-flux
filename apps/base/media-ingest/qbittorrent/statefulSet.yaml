@@ -4,7 +4,7 @@ metadata:
   labels:
     app: qbittorrent
   name: qbittorrent-prod-media-statefulset
-  namespace: media
+  namespace: media-ingest
 spec:
   replicas: 3
   selector:

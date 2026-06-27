@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: prowlarr-prod-media-ingress
-  namespace: media
+  namespace: media-ingest
 spec:
   ingressClassName: nginx
   rules:

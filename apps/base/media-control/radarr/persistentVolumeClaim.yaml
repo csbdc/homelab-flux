@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: radarr-prod-media-pvc
-  namespace: media
+  namespace: media-control
 spec:
   accessModes:
     - ReadWriteOnce

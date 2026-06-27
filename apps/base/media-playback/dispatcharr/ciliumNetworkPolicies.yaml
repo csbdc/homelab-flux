@@ -2,7 +2,7 @@
 # kind: CiliumNetworkPolicy
 # metadata:
 #   name: allow-dispatcharr
-#   namespace: media
+#   namespace: media-playback
 # spec:
 #   endpointSelector:
 #     matchLabels:

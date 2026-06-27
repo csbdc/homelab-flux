@@ -4,7 +4,7 @@ metadata:
   labels:
     app: sonarr
   name: sonarr-prod-media-deployment
-  namespace: media
+  namespace: media-control
 spec:
   replicas: 1
   selector:
