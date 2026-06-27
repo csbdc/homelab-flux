@@ -10,5 +10,5 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./longhorn
+  path: ./infrastructure/storage/longhorn
   prune: false

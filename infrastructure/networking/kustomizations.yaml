@@ -10,7 +10,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./metallb
+  path: ./infrastructure/networking/metallb
   prune: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -27,7 +27,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./nginx-ingress
+  path: ./infrastructure/networking/nginx-ingress
   prune: false
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -44,5 +44,5 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./external-dns
+  path: ./infrastructure/networking/external-dns
   prune: false
