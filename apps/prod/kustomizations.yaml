@@ -6,7 +6,6 @@ metadata:
 spec:
   interval: 30s
   timeout: 5m
-  dependsOn:
   sourceRef:
     kind: GitRepository
     name: homelab-github-flux-sync
