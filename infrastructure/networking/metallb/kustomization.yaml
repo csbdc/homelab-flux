@@ -3,5 +3,5 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - ./metallb
-  - ./cert-manager
+  - ./00-install
+  - ./10-config
