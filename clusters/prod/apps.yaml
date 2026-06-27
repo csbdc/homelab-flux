@@ -7,7 +7,9 @@ spec:
   interval: 30s
   timeout: 5m
   dependsOn:
-    - name: configs
+    - name: controllers
+    - name: networking
+    - name: storage
   sourceRef:
     kind: GitRepository
     name: homelab-github-flux-sync
