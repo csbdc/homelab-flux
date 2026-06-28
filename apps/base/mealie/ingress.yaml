@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "mealie.cbxon.local"
+  - host: "mealie.home.arpa"
     http:
       paths:
       - pathType: Prefix

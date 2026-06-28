@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "bazarr.cbxon.local"
+  - host: "bazarr.home.arpa"
     http:
       paths:
       - pathType: Prefix

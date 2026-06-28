@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "sonarr.cbxon.local"
+  - host: "sonarr.home.arpa"
     http:
       paths:
       - pathType: Prefix

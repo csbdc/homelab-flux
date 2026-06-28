@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "dispatcharr.cbxon.local"
+  - host: "dispatcharr.home.arpa"
     http:
       paths:
       - pathType: Prefix

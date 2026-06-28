@@ -17,6 +17,15 @@ spec:
       labels:
         app: jellyfin
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - talos-uh1-bo3
       securityContext:
         fsGroup: 10000
         runAsGroup: 10000
@@ -59,12 +68,10 @@ spec:
         persistentVolumeClaim:
           claimName: jellyfin-prod-media-pvc
       - name: tv-data
-        nfs:
-          server: 192.168.10.197
-          path: /srv/nfs/tv
+        hostPath:
+          path: /var/mnt/media-data/tv
           readOnly: true
       - name: movies-data
-        nfs:
-          server: 192.168.10.197
-          path: /srv/nfs/movies
+        hostPath:
+          path: /var/mnt/media-data/movies
           readOnly: true
