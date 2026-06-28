@@ -4,7 +4,7 @@ metadata:
   name: valkey
   namespace: default
 spec:
-  targetNamespace: dispatcharr
+  targetnamespace: media-playback
   interval: 10m
   chart:
     spec:

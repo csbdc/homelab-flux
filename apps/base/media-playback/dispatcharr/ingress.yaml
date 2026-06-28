@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: dispatcharr-prod-ingress
-  namespace: dispatcharr
+  namespace: media-playback
   labels:
     app: dispatcharr
 spec:

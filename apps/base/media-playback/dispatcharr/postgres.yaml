@@ -2,7 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: dispatcharr-prod-pg
-  namespace: dispatcharr
+  namespace: media-playback
   labels:
     app: dispatcharr
     tier: data
