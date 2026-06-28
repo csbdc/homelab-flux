@@ -16,7 +16,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: metrics-server
+  name: observability
   namespace: default
 spec:
   interval: 30s
@@ -25,5 +25,5 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./apps/prod/metrics-server
-  prune: false
+  path: ./apps/prod/observability
+  prune: true
