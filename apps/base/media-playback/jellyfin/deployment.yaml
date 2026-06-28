@@ -70,8 +70,8 @@ spec:
       - name: tv-data
         hostPath:
           path: /var/mnt/media-data/tv
-          readOnly: true
+          type: "DirectoryOrCreate"
       - name: movies-data
         hostPath:
           path: /var/mnt/media-data/movies
-          readOnly: true
+          type: "DirectoryOrCreate"
