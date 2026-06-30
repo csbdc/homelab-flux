@@ -11,4 +11,4 @@ spec:
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./infrastructure/storage/longhorn
-  prune: false
+  prune: true
