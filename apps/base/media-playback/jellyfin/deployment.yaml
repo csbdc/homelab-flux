@@ -68,10 +68,8 @@ spec:
         persistentVolumeClaim:
           claimName: jellyfin-prod-media-pvc
       - name: tv-data
-        hostPath:
-          path: /var/mnt/media-data/tv
-          type: "DirectoryOrCreate"
+        persistentVolumeClaim:
+          claimName: shared-media-drive
       - name: movies-data
-        hostPath:
-          path: /var/mnt/media-data/movies
-          type: "DirectoryOrCreate"
+        persistentVolumeClaim:
+          claimName: shared-media-drive

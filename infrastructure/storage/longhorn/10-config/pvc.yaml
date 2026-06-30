@@ -3,8 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: shared-media-drive
   namespace: longhorn-system
-  labels:
-    usage: media
 spec:
   accessModes:
     - ReadWriteMany
