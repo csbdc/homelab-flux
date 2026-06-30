@@ -5,7 +5,7 @@ metadata:
 provisioner: driver.longhorn.io
 allowVolumeExpansion: true
 parameters:
-  numberOfReplicas: "3"
+  numberOfReplicas: "1"
   fsType: "ext4"
 # NFS mount options for better performance
 mountOptions:
