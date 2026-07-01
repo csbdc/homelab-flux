@@ -59,17 +59,13 @@ spec:
         volumeMounts:
         - name: app-data
           mountPath: /config
-        - name: tv-data
-          mountPath: /tv
-        - name: movies-data
-          mountPath: /movies
+        - name: data
+          mountPath: /data
       volumes:
       - name: app-data
         persistentVolumeClaim:
           claimName: jellyfin-prod-media-pvc
-      - name: tv-data
-        persistentVolumeClaim:
-          claimName: shared-media-drive
-      - name: movies-data
-        persistentVolumeClaim:
-          claimName: shared-media-drive
+      - name: data
+        nfs:
+          path: /
+          server: shared-media.longhorn-system

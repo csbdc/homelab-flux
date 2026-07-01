@@ -5,3 +5,4 @@ metadata:
 resources:
   - storageClass.yaml
   - pvc.yaml
+  - service.yaml
