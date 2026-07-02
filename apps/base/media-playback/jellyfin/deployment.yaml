@@ -59,14 +59,12 @@ spec:
         volumeMounts:
         - name: app-data
           mountPath: /config
-        - name: data
-          mountPath: /media-data
+        - name: media
+          mountPath: /media
       volumes:
       - name: app-data
         persistentVolumeClaim:
           claimName: jellyfin-prod-media-pvc
-      - name: data
-        nfs:
-          path: /
-          server: 10.106.110.147
-          readOnly: false
+      - name: media
+        persistentVolumeClaim:
+          claimName: media-share
