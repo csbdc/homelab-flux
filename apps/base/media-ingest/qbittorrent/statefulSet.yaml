@@ -63,4 +63,4 @@ spec:
       - name: complete
         nfs:
           server: 10.102.53.187
-          path: /pvc-762ba890-5b5f-4e3c-b038-9ec07190b19e                                                                                                       
+          path: /export/pvc-762ba890-5b5f-4e3c-b038-9ec07190b19e/downloads
