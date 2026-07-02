@@ -74,9 +74,9 @@ spec:
           claimName: sonarr-prod-media-pvc
       - name: media-data
         nfs:
-          server: 192.168.10.197
-          path: /srv/nfs/tv
+          server: 10.102.53.187
+          path: /export/pvc-762ba890-5b5f-4e3c-b038-9ec07190b19e/tv
       - name: downloads
         nfs:
-          server: 192.168.10.197
-          path: /srv/nfs/downloads
+          server: 10.102.53.187
+          path: /export/pvc-762ba890-5b5f-4e3c-b038-9ec07190b19e/downloads
