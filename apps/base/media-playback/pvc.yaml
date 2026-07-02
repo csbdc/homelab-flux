@@ -5,3 +5,5 @@ metadata:
   namespace: media-playback
 spec:
   storageClassName: "nfs"
+  accessModes:
+    - ReadWriteMany
