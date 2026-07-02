@@ -14,6 +14,8 @@ spec:
       port: 2049
       protocol: TCP
       targetPort: 2049
+  type: LoadBalancer
+  loadBalancerIP: 192.168.40.5
   selector:
     longhorn.io/component: share-manager
     longhorn.io/managed-by: longhorn-manager
