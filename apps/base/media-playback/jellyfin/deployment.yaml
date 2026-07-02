@@ -33,7 +33,7 @@ spec:
         runAsUser: 10000
         seccompProfile:
           type: RuntimeDefault
-        readOnlyRootFilesystem: true
+
       automountServiceAccountToken: false
       containers:
       - securityContext:
@@ -60,7 +60,7 @@ spec:
         - name: app-data
           mountPath: /config
         - name: data
-          mountPath: /data
+          mountPath: /media-data
       volumes:
       - name: app-data
         persistentVolumeClaim:
@@ -68,4 +68,5 @@ spec:
       - name: data
         nfs:
           path: /
-          server: 10.106.110.148
+          server: 10.106.110.147
+          readOnly: false
