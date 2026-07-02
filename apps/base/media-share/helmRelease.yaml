@@ -16,3 +16,14 @@ spec:
         name: nfs-ganesha-server-and-external-provisioner
         namespace: default
       interval: 10m
+  values:
+    nodeSelector:
+      kubernetes.io/hostname: talos-uh1-bo3
+
+    persistence:
+      enabled: true
+      storageClass: "-"
+      size: 1000Gi
+
+    storageClass:
+      defaultClass: true
