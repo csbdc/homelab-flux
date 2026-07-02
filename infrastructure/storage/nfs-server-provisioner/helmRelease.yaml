@@ -6,7 +6,7 @@ metadata:
 spec:
   install:
     createNamespace: true
-  targetNamespace: media-share
+  targetNamespace: nfs-server-provisioner
   interval: 10m
   chart:
     spec:
@@ -24,6 +24,3 @@ spec:
       enabled: true
       storageClass: "-"
       size: 1000Gi
-
-    storageClass:
-      defaultClass: true
