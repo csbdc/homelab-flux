@@ -3,6 +3,7 @@ kind: PersistentVolume
 metadata:
   name: data-media-share-nfs-server-provisioner-0
 spec:
+  
   capacity:
     storage: 1000Gi
   accessModes:
@@ -10,5 +11,5 @@ spec:
   hostPath:
     path: /var/mnt/media-data
   claimRef:
-    namespace: kube-system
+    namespace: media-share
     name: data-media-share-nfs-server-provisioner-0
