@@ -16,3 +16,22 @@ spec:
         name: kube-prometheus-stack
         namespace: default
       interval: 10m
+  values:
+    grafana:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - grafana.home.arpa
+    prometheus:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - prometheus.home.arpa
+    alertmanager:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - alertmanager.home.arpa
