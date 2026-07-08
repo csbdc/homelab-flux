@@ -19,5 +19,6 @@ spec:
   values:
     expose:
       ingress:
+        className: nginx
         hosts:
           core: harbor.home.arpa
