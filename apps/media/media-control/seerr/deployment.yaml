@@ -48,11 +48,14 @@ spec:
           mountPath: /app/config
           readOnly: false
         - name: oidc-config
-          mountPath: /tmp/seerr
+          mountPath: /app/config
       volumes:
       - name: data
         persistentVolumeClaim:
           claimName: seerr-prod-media-pvc
       - name: oidc-config
         secret:
-          secretName: seerr-oidc-config
+          secretName: seerr-oidc-config2
+          items:
+            - key: settings.json
+              path: settings.json
