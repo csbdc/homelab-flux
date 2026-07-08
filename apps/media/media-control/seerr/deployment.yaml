@@ -31,7 +31,7 @@ spec:
           command:
             - sh
             - -c
-            - cp /secret/config.json /app/config/settings.json
+            - cp /secret/config.json /app/config/config.json
           volumeMounts:
             - name: oidc-config
               mountPath: /secret/config.json
