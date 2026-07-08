@@ -49,6 +49,8 @@ spec:
           readOnly: false
         - name: oidc-config
           mountPath: /app/config
+          subPath: settings.json
+          readOnly: true
       volumes:
       - name: data
         persistentVolumeClaim:
