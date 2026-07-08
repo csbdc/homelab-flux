@@ -25,6 +25,20 @@ spec:
           type: RuntimeDefault
         readOnlyRootFilesystem: true
       automountServiceAccountToken: false
+      initContainers:
+        - name: copy-config
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - cp /secret/settings.json /app/config/settings.json
+          volumeMounts:
+            - name: oidc-config
+              mountPath: /secret/settings.json
+              subPath: settings.json
+              readOnly: true
+            - name: data
+              mountPath: /app/config
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
@@ -47,10 +61,6 @@ spec:
         - name: data
           mountPath: /app/config
           readOnly: false
-        - name: oidc-config
-          mountPath: /app/config/settings.json
-          subPath: settings.json
-          readOnly: true
       volumes:
       - name: data
         persistentVolumeClaim:
