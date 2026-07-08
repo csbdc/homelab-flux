@@ -4,6 +4,7 @@ metadata:
   name: kustomization
 resources:
   - persistentVolumeClaim.yaml
+  - secrets.yaml
   - service.yaml
   - deployment.yaml
   - ingress.yaml
