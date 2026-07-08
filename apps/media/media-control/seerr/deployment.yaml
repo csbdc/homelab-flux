@@ -46,6 +46,13 @@ spec:
               fi
 
               cat /tmp/settings.json > /app/config/settings.json
+          volumeMounts:
+            - name: oidc-config
+              mountPath: /secret/config.json
+              subPath: config.json
+              readOnly: true
+            - name: data
+              mountPath: /app/config
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
