@@ -26,12 +26,16 @@ spec:
         readOnlyRootFilesystem: true
       automountServiceAccountToken: false
       initContainers:
-        - name: copy-config
-          image: busybox:1.36
+        - name: merge-config
+          image: ghcr.io/jqlang/jq:latest
           command:
             - sh
             - -c
-            - cp /secret/config.json /app/config/config.json
+            - |
+              jq -s '.[0] * .[1]' \
+                /app/config/settings.json \
+                /secret/config.json \
+                > /app/config/settings.json
           volumeMounts:
             - name: oidc-config
               mountPath: /secret/config.json
