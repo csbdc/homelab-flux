@@ -20,5 +20,4 @@ spec:
     expose:
       ingress:
         hosts:
-          core:
-            - harbor.home.arpa
+          core: harbor.home.arpa
