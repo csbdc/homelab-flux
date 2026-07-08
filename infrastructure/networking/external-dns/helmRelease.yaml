@@ -16,3 +16,42 @@ spec:
         name: external-dns
         namespace: default
       interval: 10m
+  values:
+    fullnameOverride: external-dns-unifi
+    provider:
+        name: webhook
+        webhook:
+            image:
+                repository: ghcr.io/home-operations/external-dns-unifi-webhook
+                tag: main # replace with a versioned release tag
+            env:
+                - name: UNIFI_HOST
+                  value: https://unifi.internal # your UniFi controller, or https://api.ui.com for the cloud connector
+                - name: UNIFI_API_KEY
+                  valueFrom:
+                      secretKeyRef:
+                          name: unifi-dns-secret
+                          key: UNIFI_API_KEY
+            livenessProbe:
+                httpGet:
+                    path: /healthz
+                    port: http-webhook
+                initialDelaySeconds: 10
+                timeoutSeconds: 5
+            readinessProbe:
+                httpGet:
+                    path: /readyz
+                    port: http-webhook
+                initialDelaySeconds: 10
+                timeoutSeconds: 5
+    triggerLoopOnEvent: true
+    policy: sync
+    sources:
+        - gateway-httproute
+        - service
+    txtOwnerId: main
+    txtPrefix: k8s.main.%{record_type}-
+    domainFilters:
+        - home.arpa # replace with your domain
+    serviceMonitor:
+        enabled: true
