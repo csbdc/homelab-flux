@@ -40,7 +40,7 @@ spec:
     server:
       ingress:
         enabled: true
-        ingressclassName: nginx
+        ingressClassName: nginx
         hosts:
           - authentik.home.arpa
 
