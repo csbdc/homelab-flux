@@ -19,7 +19,7 @@ spec:
   values:
     authentik:
       secret_key: file:///authentik-secrets/secret-key
-      postresql:
+      postgresql:
         host: file:///authentik-postgresql/host
         name: file:///authentik-postgresql/dbname
         user: file:///authentik-postgresql/username
