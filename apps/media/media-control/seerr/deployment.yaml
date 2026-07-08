@@ -28,12 +28,7 @@ spec:
       initContainers:
         - name: merge-config
           image: ghcr.io/jqlang/jq:latest
-          command:
-            - jq
-            - -s '.[0] * .[1]' \
-                /app/config/settings.json \
-                /secret/config.json \
-                > /app/config/settings.json
+          command: ["-s '.[0] * .[1]' /app/config/settings.json /secret/config.json > /app/config/settings.json"]
           volumeMounts:
             - name: oidc-config
               mountPath: /secret/config.json
