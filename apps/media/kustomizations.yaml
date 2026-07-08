@@ -10,7 +10,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./media/media-ingest
+  path: ./apps/media/media-ingest
   prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -25,7 +25,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./media/media-control
+  path: ./apps/media/media-control
   prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -40,5 +40,5 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./media/media-playback
+  path: ./apps/media/media-playback
   prune: true

@@ -10,7 +10,7 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./observability/metrics-server
+  path: ./apps/observability/metrics-server
   prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -25,5 +25,5 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./observability/kube-prometheus-stack
+  path: ./apps/observability/kube-prometheus-stack
   prune: true

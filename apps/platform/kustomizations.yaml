@@ -10,5 +10,5 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./platform/harbor
+  path: ./apps/platform/harbor
   prune: true
