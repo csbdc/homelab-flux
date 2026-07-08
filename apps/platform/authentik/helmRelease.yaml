@@ -17,8 +17,17 @@ spec:
         namespace: default
       interval: 10m
   values:
-    expose:
+    authentik:
+      secret_key: file:///authentik-secrets/secret_key
+    global:
+      volumes:
+        - name: authentik-secrets
+          secret:
+            secretName: authentik-secrets
+    server:
       ingress:
-        className: nginx
+        enabled: true
+        ingressclassName: nginx
         hosts:
-          core: authentik.home.arpa
+          - authentik.home.arpa
+
