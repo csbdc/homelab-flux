@@ -29,10 +29,8 @@ spec:
         - name: merge-config
           image: ghcr.io/jqlang/jq:latest
           command:
-            - sh
-            - -c
-            - |
-              jq -s '.[0] * .[1]' \
+            - jq
+            - -s '.[0] * .[1]' \
                 /app/config/settings.json \
                 /secret/config.json \
                 > /app/config/settings.json
