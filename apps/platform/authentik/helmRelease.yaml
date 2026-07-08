@@ -18,7 +18,7 @@ spec:
       interval: 10m
   values:
     authentik:
-      secret_key: file:///authentik-secrets/secret_key
+      secret_key: file:///authentik-secrets/secret-key
     global:
       volumes:
         - name: authentik-secrets
