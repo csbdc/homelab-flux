@@ -12,3 +12,4 @@ spec:
   claimRef:
     namespace: nfs-server-provisioner
     name: data-nfs-server-provisioner-nfs-server-provisioner-0
+  persistentVolumeReclaimPolicy: Retain
