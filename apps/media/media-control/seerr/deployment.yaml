@@ -48,8 +48,8 @@ spec:
           mountPath: /app/config
           readOnly: false
         - name: oidc-config
-          mountPath: /app/config/settings.json
-          subPath: settings.json
+          mountPath: /app/config/settings.json.tmp
+          subPath: settings.json.tmp
           readOnly: true
       volumes:
       - name: data
@@ -60,4 +60,4 @@ spec:
           secretName: seerr-oidc-config2
           items:
             - key: settings.json
-              path: settings.json
+              path: settings.json.tmp
