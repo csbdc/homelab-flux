@@ -31,11 +31,11 @@ spec:
           command:
             - sh
             - -c
-            - cp /secret/settings.json /app/config/settings.json
+            - cp /secret/config.json /app/config/settings.json
           volumeMounts:
             - name: oidc-config
-              mountPath: /secret/settings.json
-              subPath: settings.json
+              mountPath: /secret/config.json
+              subPath: config.json
               readOnly: true
             - name: data
               mountPath: /app/config
@@ -67,7 +67,7 @@ spec:
           claimName: seerr-prod-media-pvc
       - name: oidc-config
         secret:
-          secretName: seerr-oidc-config2
+          secretName: seerr-oidc-config
           items:
-            - key: settings.json
-              path: settings.json
+            - key: config.json
+              path: config.json

@@ -1,0 +1,94 @@
+{
+    "oidc": {
+    "providers": [
+      {
+        "slug": "authentik",
+        "name": "authentik",
+        "issuerUrl": "https://authentik.company/application/o/seerr/",
+        "clientId": "tlsccf$Kocugx47qYp_8gLPNj@Lgi0Y-SDs7MYoM-a",
+        "clientSecret": "kB$mLXmhNvIkUl$hHq$-jY1RdEiaNIS4t5W-hT03aZ",
+        "logo": "https://authentik.company/static/dist/assets/icons/icon.svg",
+        "newUserLogin": true
+      }
+    ]
+  },
+  "main": {
+    "oidcLogin": true,
+    "applicationTitle": "Seerr",
+    "defaultPermissions": 32,
+    "defaultQuotas": {
+      "movie": {
+        "quotaLimit": 0,
+        "quotaDays": 7
+      },
+      "tv": {
+        "quotaLimit": 0,
+        "quotaDays": 7
+      }
+    },
+    "streamingRegion": "GB",
+    "originalLanguage": "en",
+    "locale": "en"
+  },
+  "jellyfin": {
+    "name": "Jellyfin-Prod",
+    "ip": "jellyfin-prod-media-svc.media-playback.svc.cluster.local",
+    "port": 8096,
+    "useSsl": false,
+    "urlBase": "",
+    "externalHostname": "http://seerr.home.arpa",
+    "jellyfinForgotPasswordUrl": "",
+    "libraries": [
+      {
+        "id": "f137a2dd21bbc1b99aa5c0f6bf02a805",
+        "name": "Movies",
+        "enabled": true,
+        "type": "movie"
+      },
+      {
+        "id": "a656b907eb3a73532e40e44b968d0225",
+        "name": "Shows",
+        "enabled": true,
+        "type": "show"
+      }
+    ],
+    "serverId": "48344f242bc5453e80da96198019d8ef",
+    "apiKey": "e7d113a852dd471b92baa824b46f224d"
+  },
+  "tautulli": {},
+  "metadataSettings": {
+    "tv": "tmdb",
+    "anime": "tmdb"
+  },
+  "radarr": [],
+  "sonarr": [
+    {
+      "name": "Sonarr",
+      "hostname": "sonarr-prod-media-svc.media-control.svc.cluster.local",
+      "port": 8989,
+      "apiKey": "48b622ece16e4733a417576de981ddeb",
+      "useSsl": false,
+      "baseUrl": "",
+      "activeProfileId": 1,
+      "activeProfileName": "Any",
+      "activeDirectory": "/tv",
+      "activeAnimeProfileId": 1,
+      "activeAnimeProfileName": "Any",
+      "activeAnimeDirectory": "/tv",
+      "tags": [],
+      "animeTags": [],
+      "is4k": false,
+      "isDefault": true,
+      "enableSeasonFolders": false,
+      "syncEnabled": true,
+      "preventSearch": false,
+      "tagRequests": false,
+      "monitorNewItems": "all",
+      "id": 0
+    }
+  ],
+  "migrations": [
+    "0007_migrate_arr_tags",
+    "0008_migrate_blacklist_to_blocklist"
+  ]
+}
