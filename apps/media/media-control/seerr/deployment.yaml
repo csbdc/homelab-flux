@@ -48,7 +48,7 @@ spec:
           mountPath: /app/config
           readOnly: false
         - name: oidc-config
-          mountPath: /app/config
+          mountPath: /app/config/settings.json
           subPath: settings.json
           readOnly: true
       volumes:
