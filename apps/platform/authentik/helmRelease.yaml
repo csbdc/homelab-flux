@@ -19,14 +19,24 @@ spec:
   values:
     authentik:
       secret_key: file:///authentik-secrets/secret-key
+      postresql:
+        host: file:///authentik-postgresql/host
+        name: file:///authentik-postgresql/dbname
+        user: file:///authentik-postgresql/username
+        password: file:///authentik-postgresql/password
     global:
       volumes:
         - name: authentik-secrets
           secret:
             secretName: authentik-secrets
+        - name: authentik-postgresql
+          secret:
+            secretName: authentik-pg-app
       volumeMounts:
         - name: authentik-secrets
           mountPath: /authentik-secrets
+        - name: authentik-postgresql
+          mountPath: /authentik-postgresql
     server:
       ingress:
         enabled: true
