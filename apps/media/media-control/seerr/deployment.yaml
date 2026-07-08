@@ -28,13 +28,6 @@ spec:
       initContainers:
         - name: merge-config
           image: alpine:3.20
-          securityContext:
-            runAsUser: 10000
-            runAsGroup: 10000
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
           command:
             - sh
             - -c
