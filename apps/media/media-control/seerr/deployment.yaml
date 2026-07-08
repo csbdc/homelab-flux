@@ -27,15 +27,25 @@ spec:
       automountServiceAccountToken: false
       initContainers:
         - name: merge-config
-          image: ghcr.io/jqlang/jq:latest
-          command: ["jq", "-s '.[0] * .[1]' /app/config/settings.json /secret/config.json > /app/config/settings.json"]
-          volumeMounts:
-            - name: oidc-config
-              mountPath: /secret/config.json
-              subPath: config.json
-              readOnly: true
-            - name: data
-              mountPath: /app/config
+          image: alpine:3.20
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          command:
+            - sh
+            - -c
+            - |
+              if [ -f /app/config/settings.json ]; then
+                jq -s '.[0] * .[1]' /app/config/settings.json /secret/config.json > /tmp/settings.json
+              else
+                cp /secret/config.json /tmp/settings.json
+              fi
+
+              cat /tmp/settings.json > /app/config/settings.json
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
