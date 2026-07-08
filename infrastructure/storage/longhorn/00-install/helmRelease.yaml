@@ -17,6 +17,7 @@ spec:
         namespace: default
       interval: 10m
   values:
-    service:
-      ui:
-        type: LoadBalancer  
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      host: longhorn.home.arpa
