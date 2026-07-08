@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: harbor
+  namespace: default
+spec:
+  install:
+    createNamespace: true
+  targetNamespace: harbor
+  interval: 10m
+  chart:
+    spec:
+      chart: harbor
+      sourceRef:
+        kind: HelmRepository
+        name: harbor
+        namespace: default
+      interval: 10m
+  values:
+    expose:
+      ingress:
+        hosts:
+          core:
+            - harbor.home.arpa
