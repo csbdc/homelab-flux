@@ -27,7 +27,14 @@ spec:
       automountServiceAccountToken: false
       initContainers:
         - name: merge-config
-          image: alpine:3.20
+          image: ghcr.io/csbdc/jq:main
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           command:
             - sh
             - -c
