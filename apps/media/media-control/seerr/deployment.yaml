@@ -58,7 +58,7 @@ spec:
           allowPrivilegeEscalation: false
           capabilities:
             drop: ["ALL"]
-        image: ghcr.io/seerr-team/seerr
+        image: docker.io/seerr/seerr:preview-new-oidc
         name: seerr
         ports:
           - containerPort: 5055
