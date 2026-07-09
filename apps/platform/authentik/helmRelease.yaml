@@ -32,11 +32,21 @@ spec:
         - name: authentik-postgresql
           secret:
             secretName: authentik-pg-app
+        - name: home-ca
+          secret:
+            secretName: home-root-ca
+            items:
+              - key: ca.crt
+                path: home-ca.pem
+
       volumeMounts:
         - name: authentik-secrets
           mountPath: /authentik-secrets
         - name: authentik-postgresql
           mountPath: /authentik-postgresql
+        - name: home-ca
+          mountPath: /etc/ssl/certs/home-ca.pem
+          subPath: home-ca.pem
     server:
       ingress:
         annotations: 
