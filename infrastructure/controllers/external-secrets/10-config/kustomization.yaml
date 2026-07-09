@@ -3,5 +3,5 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - eso-secret-store.yaml
+  - ca-secret-store.yaml
   - ca-secret.yaml
