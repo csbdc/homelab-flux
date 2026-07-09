@@ -64,6 +64,9 @@ spec:
           - containerPort: 5055
             name: http
             protocol: TCP
+        env:
+          - name: NODE_EXTRA_CA_CERTS
+            value: "/etc/ssl/certs/home-ca.pem"
         resources:
           limits:
             cpu: 500m
@@ -76,8 +79,8 @@ spec:
           mountPath: /app/config
           readOnly: false
         - name: home-ca
-          mountPath: /etc/ssl/certs/home-ca.crt
-          subPath: home-ca.crt
+          mountPath: /etc/ssl/certs/home-ca.pem
+          subPath: home-ca.pem
       volumes:
       - name: data
         persistentVolumeClaim:
@@ -93,4 +96,4 @@ spec:
           secretName: home-root-ca
           items:
             - key: ca.crt
-              path: home-ca.crt
+              path: home-ca.pem
