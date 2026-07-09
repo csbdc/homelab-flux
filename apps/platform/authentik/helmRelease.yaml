@@ -39,8 +39,15 @@ spec:
           mountPath: /authentik-postgresql
     server:
       ingress:
+        annotations: 
+          cert-manager.io/cluster-issuer: home-ca-issuer
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
         enabled: true
         ingressClassName: nginx
         hosts:
           - authentik.home.arpa
-
+        tls:
+          - hosts:
+            - authentik.home.arpa
+            secretName: media-prod-tls-internal
+          
