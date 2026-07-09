@@ -1,10 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: jellyfin-prod-media-ingress
+  name: jellyfin-prod-media-ingress-internal
   namespace: media-playback
+  annotations: 
+    cert-manager.io/cluster-issuer: home-ca-issuer
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - jellyfin.home.arpa
+    secretName: media-prod-tls
   rules:
   - host: "jellyfin.home.arpa"
     http:
@@ -20,7 +27,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: jellyfin-prod-media-ingress-https
+  name: jellyfin-prod-media-ingress-external
   namespace: media-playback
   annotations:
     cert-manager.io/cluster-issuer: cert-cluster-issuer
