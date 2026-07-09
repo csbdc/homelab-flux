@@ -3,5 +3,6 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - ./00-install
-  - ./10-config
+  - namespace.yaml
+  - helmRepository.yaml
+  - helmRelease.yaml
