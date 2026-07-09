@@ -53,6 +53,9 @@ spec:
               readOnly: true
             - name: data
               mountPath: /app/config
+            - name: home-ca
+              mountPath: /etc/ssl/certs/home-ca.crt
+              subPath: home-ca.crt
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
@@ -85,3 +88,9 @@ spec:
           items:
             - key: config.json
               path: config.json
+      - name: home-ca
+        secret:
+          secretName: home-root-ca
+          items:
+            - key: ca.crt
+              path: ca.crt
