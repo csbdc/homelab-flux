@@ -11,7 +11,7 @@ spec:
   tls:
   - hosts:
     - jellyfin.home.arpa
-    secretName: media-prod-tls
+    secretName: media-prod-tls-internal
   rules:
   - host: "jellyfin.home.arpa"
     http:
