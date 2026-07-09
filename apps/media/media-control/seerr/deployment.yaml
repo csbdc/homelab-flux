@@ -93,4 +93,4 @@ spec:
           secretName: home-root-ca
           items:
             - key: ca.crt
-              path: ca.crt
+              path: home-ca.crt
