@@ -3,8 +3,17 @@ kind: Ingress
 metadata:
   name: qbittorrent-prod-media-ingress
   namespace: media-ingest
+  annotations: 
+    cert-manager.io/cluster-issuer: home-ca-issuer
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - qbittorrent-0.home.arpa
+    - qbittorrent-1.home.arpa
+    - qbittorrent-2.home.arpa
+    secretName: media-prod-tls-internal
   rules:
   - host: "qbittorrent-0.home.arpa"
     http:

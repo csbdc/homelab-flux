@@ -3,10 +3,15 @@ kind: Ingress
 metadata:
   name: dispatcharr-prod-ingress
   namespace: media-playback
-  labels:
-    app: dispatcharr
+  annotations: 
+    cert-manager.io/cluster-issuer: home-ca-issuer
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - dispatcharr.home.arpa
+    secretName: media-prod-tls-internal
   rules:
   - host: "dispatcharr.home.arpa"
     http:
