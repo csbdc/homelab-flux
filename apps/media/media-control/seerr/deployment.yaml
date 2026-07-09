@@ -53,9 +53,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /app/config
-            - name: home-ca
-              mountPath: /etc/ssl/certs/home-ca.crt
-              subPath: home-ca.crt
       containers:
       - securityContext:
           allowPrivilegeEscalation: false
@@ -78,6 +75,9 @@ spec:
         - name: data
           mountPath: /app/config
           readOnly: false
+        - name: home-ca
+          mountPath: /etc/ssl/certs/home-ca.crt
+          subPath: home-ca.crt
       volumes:
       - name: data
         persistentVolumeClaim:
