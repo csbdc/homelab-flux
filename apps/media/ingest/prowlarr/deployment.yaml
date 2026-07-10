@@ -29,7 +29,7 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: prowlarr-config
+            secretName: prowlarr-media-config
             items:
               - key: config.xml
                 path: config.xml

@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: radarr-config
+            secretName: radarr-media-config
             items:
               - key: config.xml
                 path: config.xml

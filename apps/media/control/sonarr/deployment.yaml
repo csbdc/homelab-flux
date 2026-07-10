@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: sonarr-config
+            secretName: sonarr-media-config
             items:
               - key: config.xml
                 path: config.xml
