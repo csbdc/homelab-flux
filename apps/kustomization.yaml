@@ -3,7 +3,7 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - platform/kustomizations.yaml
-  - observability/kustomizations.yaml
-  - game/kustomizations.yaml
+  - platform/ks.yaml
+  - observability/ks.yaml
+  - game/ks.yaml
   - ./media

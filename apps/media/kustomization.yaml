@@ -6,6 +6,6 @@ metadata:
 resources:
   - namespace.yaml
   - pvc.yaml
-  - ingest/kustomizations.yaml
-  - control/kustomizations.yaml
-  - playback/kustomizations.yaml
+  - ingest/ks.yaml
+  - control/ks.yaml
+  - playback/ks.yaml
