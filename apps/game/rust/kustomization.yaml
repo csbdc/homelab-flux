@@ -6,5 +6,4 @@ namespace: rust
 resources:
   - namespace.yaml
   - persistentVolumeClaim.yaml
-  - secret.yaml
   - deployment.yaml
