@@ -3,8 +3,6 @@ kind: Kustomization
 metadata:
   name: kustomization
 
-namespace: media
-
 resources:
   - namespace.yaml
   - pvc.yaml
