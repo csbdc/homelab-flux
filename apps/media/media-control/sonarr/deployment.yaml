@@ -34,7 +34,7 @@ spec:
             - -c
             - |
               cp /source/config.xml /config/config.xml
-              chmod 0444 /config/config.xml
+              chmod 0664 /config/config.xml
           securityContext:
             runAsNonRoot: true
             runAsUser: 1000
