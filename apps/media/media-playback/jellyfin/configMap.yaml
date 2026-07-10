@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: jellyfin-prod-media-config
-  namespace: media-playback
-data:
-  JELLYFIN_PublishedServerUrl: http://jellyfin.cbxon.co.uk

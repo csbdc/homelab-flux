@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: media-svc
+spec:
+  selector:
+    app: sonarr
+  ports:
+    - name: http
+      port: 8989
+      protocol: TCP
+      targetPort: http

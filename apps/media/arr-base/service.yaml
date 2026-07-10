@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: media-svc
+spec:
+  selector:
+    app: sonarr
+  ports: []

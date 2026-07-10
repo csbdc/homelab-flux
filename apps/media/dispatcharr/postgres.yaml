@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: dispatcharr-prod-pg
+  labels:
+    app: dispatcharr
+    tier: data
+spec:
+  instances: 1
+  storage:
+    size: 5Gi

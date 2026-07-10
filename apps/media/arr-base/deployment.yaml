@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  selector:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+    spec:
+      securityContext:
+        fsGroup: 10000
+        runAsGroup: 10000
+        runAsNonRoot: true
+        runAsUser: 10000
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
+      initContainers:
+        - securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: app-data
+              mountPath: /config
+            - name: config
+              mountPath: /source/config.xml
+              subPath: config.xml
+              readOnly: true
+          name: copy-config
+          image: busybox:1.37
+          command:
+            - sh
+            - -c
+            - |
+              cp /source/config.xml /config/config.xml
+              chmod 0664 /config/config.xml
+      containers:
+      - name: arr-app
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 250Mi
+        volumeMounts:
+          - name: app-data
+            mountPath: /config
+          - name: downloads
+            mountPath: /downloads
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 0000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 0000
+          initialDelaySeconds: 20
+          periodSeconds: 3
+        ports: []
+      volumes:
+        - name: downloads
+          nfs:
+            server: 10.102.53.187
+            path: /export/pvc-c3aa9600-76a0-4801-80d7-c709f29ba3e2/downloads
+

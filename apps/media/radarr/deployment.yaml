@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: radarr
+  name: deployment
+spec:
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+        - name: arr-app
+          image: ghcr.io/csbdc/radarr:main
+          livenessProbe:
+            httpGet:
+              port: 7878
+          readinessProbe:
+            httpGet:
+              port: 7878
+          ports:
+            - containerPort: 7878
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: media-data
+              mountPath: /movies
+      volumes:
+        - name: config
+          secret:
+            secretName: radarr-config
+            items:
+              - key: config.xml
+                path: config.xml
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: radarr-prod-pvc
+        - name: media-data
+          nfs:
+            server: 10.102.53.187
+            path: /export/pvc-c3aa9600-76a0-4801-80d7-c709f29ba3e2/movies

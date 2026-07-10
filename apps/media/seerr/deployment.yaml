@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: seerr
+  name: seerr-prod-media-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seerr
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: seerr
+    spec:  
+      securityContext:
+        fsGroup: 10000
+        runAsGroup: 10000
+        runAsNonRoot: true
+        runAsUser: 10000
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
+      initContainers:
+        - name: merge-config
+          image: ghcr.io/csbdc/jq:main
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          command:
+            - sh
+            - -c
+            - |
+              if [ -f /app/config/settings.json ]; then
+                jq -s '.[0] * .[1]' /app/config/settings.json /secret/config.json > /tmp/settings.json
+              else
+                cp /secret/config.json /tmp/settings.json
+              fi
+
+              cat /tmp/settings.json > /app/config/settings.json
+          volumeMounts:
+            - name: oidc-config
+              mountPath: /secret/config.json
+              subPath: config.json
+              readOnly: true
+            - name: data
+              mountPath: /app/config
+      containers:
+      - securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+        image: docker.io/seerr/seerr:preview-new-oidc
+        name: seerr
+        ports:
+          - containerPort: 5055
+            name: http
+            protocol: TCP
+        env:
+          - name: NODE_EXTRA_CA_CERTS
+            value: "/certs/home-ca.pem"
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 250m
+            memory: 250Mi
+        volumeMounts:
+        - name: data
+          mountPath: /app/config
+          readOnly: false
+        - name: home-ca
+          mountPath: /certs/home-ca.pem
+          subPath: home-ca.pem
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: seerr-prod-media-pvc
+      - name: oidc-config
+        secret:
+          secretName: seerr-oidc-config
+          items:
+            - key: config.json
+              path: config.json
+      - name: home-ca
+        secret:
+          secretName: home-root-ca
+          items:
+            - key: ca.crt
+              path: home-ca.pem

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prowlarr
+  name: deployment
+spec:
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      containers:
+        - name: arr-app
+          image: ghcr.io/csbdc/prowlarr:main
+          livenessProbe:
+            httpGet:
+              port: 9696
+          readinessProbe:
+            httpGet:
+              port: 9696
+          ports:
+            - containerPort: 9696
+              name: http
+              protocol: TCP
+      volumes:
+        - name: config
+          secret:
+            secretName: prowlarr-config
+            items:
+              - key: config.xml
+                path: config.xml
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: prowlarr-prod-pvc

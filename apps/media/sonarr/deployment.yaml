@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarr
+  name: deployment
+spec:
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+        - name: arr-app
+          image: ghcr.io/csbdc/sonarr:main
+          livenessProbe:
+            httpGet:
+              port: 8989
+          readinessProbe:
+            httpGet:
+              port: 8989
+          ports:
+            - containerPort: 8989
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: media-data
+              mountPath: /tv
+      volumes:
+        - name: config
+          secret:
+            secretName: sonarr-config
+            items:
+              - key: config.xml
+                path: config.xml
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: sonarr-prod-pvc
+        - name: media-data
+          nfs:
+            server: 10.102.53.187
+            path: /export/pvc-c3aa9600-76a0-4801-80d7-c709f29ba3e2/tv

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dispatcharr-prod-svc
+  labels:
+    app: dispatcharr
+spec:
+  selector:
+    app: dispatcharr
+    tier: frontend
+  ports:
+    - port: 9191
+      targetPort: http
+      name: http
+      protocol: TCP
