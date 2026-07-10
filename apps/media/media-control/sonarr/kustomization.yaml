@@ -7,4 +7,3 @@ resources:
   - service.yaml
   - secrets.yaml
   - deployment.yaml
-  - ingress.yaml

@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: proxied-ingress
+  namespace: authentik
+  annotations: 
+    cert-manager.io/cluster-issuer: home-ca-issuer
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - sonarr.home.arpa
+    - radarr.home.arpa
+    - prowlarr.home.arpa
+    - bazarr.home.arpa
+    secretName: home-arpa-tls
+  rules:
+  - host: "sonarr.home.arpa"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: authentik-authentik-server
+            port:
+              number: 80
+  - host: "radarr.home.arpa"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: authentik-authentik-server
+            port:
+              number: 80
+  - host: "prowlarr.home.arpa"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: authentik-authentik-server
+            port:
+              number: 80
+  - host: "bazarr.home.arpa"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: authentik-authentik-server
+            port:
+              number: 80
