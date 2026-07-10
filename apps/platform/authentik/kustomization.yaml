@@ -8,3 +8,4 @@ resources:
   - postgres.yaml
   - helmRepository.yaml
   - helmRelease.yaml
+  - ingress.yaml
