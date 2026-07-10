@@ -35,4 +35,4 @@ spec:
                 path: config.xml
         - name: app-data
           persistentVolumeClaim:
-            claimName: prowlarr-prod-pvc
+            claimName: prowlarr-media-pvc
