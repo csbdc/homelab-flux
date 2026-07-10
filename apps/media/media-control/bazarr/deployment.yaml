@@ -44,8 +44,8 @@ spec:
       - name: tv-data
         nfs:
           server: 10.102.53.187
-          path: /export/pvc-762ba890-5b5f-4e3c-b038-9ec07190b19e/tv
+          path: /export/pvc-c3aa9600-76a0-4801-80d7-c709f29ba3e2/tv
       - name: movies-data
         nfs:
           server: 10.102.53.187
-          path: /export/pvc-762ba890-5b5f-4e3c-b038-9ec07190b19e/movies
+          path: /export/pvc-c3aa9600-76a0-4801-80d7-c709f29ba3e2/movies
