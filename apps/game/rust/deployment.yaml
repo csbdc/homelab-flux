@@ -4,9 +4,8 @@ metadata:
   labels:
     app: rpp
   name: rpp-prod-rust-deployment
-  namespace: rust
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: rpp
@@ -16,7 +15,6 @@ spec:
       labels:
         app: rpp
     spec:
-
       securityContext:
         fsGroup: 10000
         runAsGroup: 10000
