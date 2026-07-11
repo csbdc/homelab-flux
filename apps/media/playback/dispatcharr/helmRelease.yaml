@@ -2,7 +2,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: valkey
-  namespace: default
 spec:
   targetNamespace: media
   interval: 10m
@@ -12,7 +11,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: valkey
-        namespace: default
       interval: 10m
   values:
     nameOverride: dispatcharr-prod-valkey
