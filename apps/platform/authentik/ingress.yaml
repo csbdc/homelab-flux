@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: proxied-ingress
-  namespace: authentik
   annotations: 
     cert-manager.io/cluster-issuer: home-ca-issuer
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
