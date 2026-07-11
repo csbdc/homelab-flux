@@ -32,38 +32,37 @@ spec:
         runAsUser: 10000
         seccompProfile:
           type: RuntimeDefault
-
       automountServiceAccountToken: false
       containers:
-      - securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
-        image: docker.io/jellyfin/jellyfin
-        name: jellyfin
-        envFrom:
-        - configMapRef:
-            name: jellyfin-prod-media-config
-        ports:
-          - containerPort: 8096
-            name: http
-            protocol: TCP
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 2Gi
-          requests:
-            cpu: 500m
-            memory: 500Mi
-        volumeMounts:
-        - name: app-data
-          mountPath: /config
-        - name: media
-          mountPath: /media
+        - securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          image: docker.io/jellyfin/jellyfin
+          name: jellyfin
+          envFrom:
+            - configMapRef:
+                name: jellyfin-prod-media-config
+          ports:
+            - containerPort: 8096
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 2Gi
+            requests:
+              cpu: 500m
+              memory: 500Mi
+          volumeMounts:
+            - name: app-data
+              mountPath: /config
+            - name: media
+              mountPath: /media
       volumes:
-      - name: app-data
-        persistentVolumeClaim:
-          claimName: jellyfin-prod-media-pvc
-      - name: media
-        persistentVolumeClaim:
-          claimName: media-share
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: jellyfin-prod-media-pvc
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-share

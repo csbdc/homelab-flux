@@ -2,45 +2,45 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: qbittorrent-prod-media-ingress
-  annotations: 
+  annotations:
     cert-manager.io/cluster-issuer: home-ca-issuer
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - qbittorrent-0.home.arpa
-    - qbittorrent-1.home.arpa
-    - qbittorrent-2.home.arpa
-    secretName: home-arpa-tls
+    - hosts:
+        - qbittorrent-0.home.arpa
+        - qbittorrent-1.home.arpa
+        - qbittorrent-2.home.arpa
+      secretName: home-arpa-tls
   rules:
-  - host: "qbittorrent-0.home.arpa"
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: qbittorrent-prod-media-svc-0
-            port:
-              number: 8080
-  - host: "qbittorrent-1.home.arpa"
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: qbittorrent-prod-media-svc-1
-            port:
-              number: 8080
-  - host: "qbittorrent-2.home.arpa"
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: qbittorrent-prod-media-svc-2
-            port:
-              number: 8080
+    - host: "qbittorrent-0.home.arpa"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: qbittorrent-prod-media-svc-0
+                port:
+                  number: 8080
+    - host: "qbittorrent-1.home.arpa"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: qbittorrent-prod-media-svc-1
+                port:
+                  number: 8080
+    - host: "qbittorrent-2.home.arpa"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: qbittorrent-prod-media-svc-2
+                port:
+                  number: 8080

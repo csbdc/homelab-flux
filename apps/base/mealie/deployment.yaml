@@ -21,47 +21,47 @@ spec:
         tier: frontend
     spec:
       containers:
-      - name: mealie
-        image: ghcr.io/mealie-recipes/mealie:nightly
-        env:
-          - name: ALLOW_SIGNUP
-            value: "false"
-          - name: LOG_LEVEL
-            value: "DEBUG"
-          - name: DB_ENGINE
-            value: "postgres"
-          - name: POSTGRES_SERVER
-            valueFrom:
-              secretKeyRef:
-                name: mealie-prod-pg-app
-                key: host
-          - name: POSTGRES_PORT
-            valueFrom:
-              secretKeyRef:
-                name: mealie-prod-pg-app
-                key: port
-          - name: POSTGRES_DB
-            valueFrom:
-              secretKeyRef:
-                name: mealie-prod-pg-app
-                key: dbname
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: mealie-prod-pg-app
-                key: username
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mealie-prod-pg-app
-                key: password
-        ports:
-          - containerPort: 9000
-            name: http
-            protocol: TCP
-        volumeMounts:
-          - name: data
-            mountPath: /app/data
+        - name: mealie
+          image: ghcr.io/mealie-recipes/mealie:nightly
+          env:
+            - name: ALLOW_SIGNUP
+              value: "false"
+            - name: LOG_LEVEL
+              value: "DEBUG"
+            - name: DB_ENGINE
+              value: "postgres"
+            - name: POSTGRES_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: mealie-prod-pg-app
+                  key: host
+            - name: POSTGRES_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: mealie-prod-pg-app
+                  key: port
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: mealie-prod-pg-app
+                  key: dbname
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mealie-prod-pg-app
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mealie-prod-pg-app
+                  key: password
+          ports:
+            - containerPort: 9000
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
       volumes:
         - name: data
           persistentVolumeClaim:

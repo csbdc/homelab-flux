@@ -49,8 +49,8 @@ spec:
                   name: dispatcharr-prod-pg-app
                   key: password
           envFrom:
-          - configMapRef:
-              name: dispatcharr-prod-web-config
+            - configMapRef:
+                name: dispatcharr-prod-web-config
           ports:
             - containerPort: 9191
               name: http
@@ -89,7 +89,7 @@ spec:
       containers:
         - name: celery
           image: ghcr.io/dispatcharr/dispatcharr:latest
-          command: 
+          command:
             - "/app/docker/entrypoint.celery.sh"
           env:
             - name: POSTGRES_HOST

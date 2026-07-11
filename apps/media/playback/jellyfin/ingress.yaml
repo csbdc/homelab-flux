@@ -2,23 +2,23 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: jellyfin-prod-media-ingress-internal
-  annotations: 
+  annotations:
     cert-manager.io/cluster-issuer: home-ca-issuer
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - jellyfin.home.arpa
-    secretName: home-arpa-tls
+    - hosts:
+        - jellyfin.home.arpa
+      secretName: home-arpa-tls
   rules:
-  - host: "jellyfin.home.arpa"
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: jellyfin-prod-media-svc
-            port:
-              number: 8096
+    - host: "jellyfin.home.arpa"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: jellyfin-prod-media-svc
+                port:
+                  number: 8096

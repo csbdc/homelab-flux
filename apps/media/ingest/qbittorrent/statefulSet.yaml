@@ -24,42 +24,42 @@ spec:
       #   readOnlyRootFilesystem: true
       # automountServiceAccountToken: false
       containers:
-      - securityContext: {}
+        - securityContext: {}
           # allowPrivilegeEscalation: false
           # capabilities:
           #   drop: ["ALL"]
-        image: docker.io/linuxserver/qbittorrent
-        name: qbittorrent
-        ports:
-          - containerPort: 8080
-            name: http
-            protocol: TCP
-          - containerPort: 6881
-            protocol: TCP
-          - containerPort: 6881
-            protocol: UDP
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 2048Mi
-          requests:
-            cpu: 500m
-            memory: 2048Mi
-        volumeMounts:
-        - name: data
-          mountPath: /config/qBittorrent/qBittorrent.conf
-          subPath: qBittorrent.conf
-        - name: downloads
-          mountPath: /downloads
-        - name: complete
-          mountPath: /complete/          
+          image: docker.io/linuxserver/qbittorrent
+          name: qbittorrent
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+            - containerPort: 6881
+              protocol: TCP
+            - containerPort: 6881
+              protocol: UDP
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 2048Mi
+          volumeMounts:
+            - name: data
+              mountPath: /config/qBittorrent/qBittorrent.conf
+              subPath: qBittorrent.conf
+            - name: downloads
+              mountPath: /downloads
+            - name: complete
+              mountPath: /complete/
       volumes:
-      - name: data
-        configMap:
-          name: qbittorrent-prod-media-config
-      - name: downloads
-        emptyDir: {}
-      - name: complete
-        nfs:
-          server: 10.102.53.187
-          path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/downloads
+        - name: data
+          configMap:
+            name: qbittorrent-prod-media-config
+        - name: downloads
+          emptyDir: {}
+        - name: complete
+          nfs:
+            server: 10.102.53.187
+            path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/downloads

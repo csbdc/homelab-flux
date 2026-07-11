@@ -19,7 +19,6 @@ spec:
   values:
     nodeSelector:
       kubernetes.io/hostname: talos-uh1-bo3
-
     persistence:
       enabled: true
       storageClass: "-"

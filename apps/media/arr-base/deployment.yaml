@@ -47,39 +47,38 @@ spec:
               cp /source/config.xml /config/config.xml
               chmod 0664 /config/config.xml
       containers:
-      - name: arr-app
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
-        resources:
-          limits:
-            cpu: 1
-            memory: 1024Mi
-          requests:
-            cpu: 250m
-            memory: 250Mi
-        volumeMounts:
-          - name: app-data
-            mountPath: /config
-          - name: downloads
-            mountPath: /downloads
-        livenessProbe:
-          httpGet:
-            path: /ping
-            port: 0000
-          initialDelaySeconds: 3
-          periodSeconds: 3
-        readinessProbe:
-          httpGet:
-            path: /ping
-            port: 0000
-          initialDelaySeconds: 20
-          periodSeconds: 3
-        ports: []
+        - name: arr-app
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            limits:
+              cpu: 1
+              memory: 1024Mi
+            requests:
+              cpu: 250m
+              memory: 250Mi
+          volumeMounts:
+            - name: app-data
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 0000
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 0000
+            initialDelaySeconds: 20
+            periodSeconds: 3
+          ports: []
       volumes:
         - name: downloads
           nfs:
             server: 10.102.53.187
             path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/downloads
-

@@ -17,34 +17,34 @@ spec:
         app: bazarr
     spec:
       containers:
-      - image: lscr.io/linuxserver/bazarr:latest
-        name: bazarr
-        env:
-          - name: PGID
-            value: "1000"
-          - name: PUID
-            value: "1000"
-        ports:
-          - containerPort: 6767
-            name: http
-            protocol: TCP
-        resources:
-        volumeMounts:
-        - name: app-data
-          mountPath: /config
-        - name: tv-data
-          mountPath: /tv
-        - name: movies-data
-          mountPath: /movies
+        - image: lscr.io/linuxserver/bazarr:latest
+          name: bazarr
+          env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+          ports:
+            - containerPort: 6767
+              name: http
+              protocol: TCP
+          resources:
+          volumeMounts:
+            - name: app-data
+              mountPath: /config
+            - name: tv-data
+              mountPath: /tv
+            - name: movies-data
+              mountPath: /movies
       volumes:
-      - name: app-data
-        persistentVolumeClaim:
-          claimName: bazarr-prod-media-pvc
-      - name: tv-data
-        nfs:
-          server: 10.102.53.187
-          path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/tv
-      - name: movies-data
-        nfs:
-          server: 10.102.53.187
-          path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/movies
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: bazarr-prod-media-pvc
+        - name: tv-data
+          nfs:
+            server: 10.102.53.187
+            path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/tv
+        - name: movies-data
+          nfs:
+            server: 10.102.53.187
+            path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/movies

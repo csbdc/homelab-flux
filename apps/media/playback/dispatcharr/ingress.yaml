@@ -2,23 +2,23 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: dispatcharr-prod-ingress
-  annotations: 
+  annotations:
     cert-manager.io/cluster-issuer: home-ca-issuer
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - dispatcharr.home.arpa
-    secretName: home-arpa-tls
+    - hosts:
+        - dispatcharr.home.arpa
+      secretName: home-arpa-tls
   rules:
-  - host: "dispatcharr.home.arpa"
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: dispatcharr-prod-svc
-            port:
-              number: 9191
+    - host: "dispatcharr.home.arpa"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: dispatcharr-prod-svc
+                port:
+                  number: 9191

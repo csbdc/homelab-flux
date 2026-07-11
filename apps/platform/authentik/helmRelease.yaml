@@ -38,7 +38,6 @@ spec:
             items:
               - key: ca.crt
                 path: home-ca.pem
-
       volumeMounts:
         - name: authentik-secrets
           mountPath: /authentik-secrets
@@ -49,7 +48,7 @@ spec:
           subPath: home-ca.pem
     server:
       ingress:
-        annotations: 
+        annotations:
           cert-manager.io/cluster-issuer: home-ca-issuer
           nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
         enabled: true
@@ -58,6 +57,5 @@ spec:
           - authentik.home.arpa
         tls:
           - hosts:
-            - authentik.home.arpa
+              - authentik.home.arpa
             secretName: home-arpa-tls
-          

@@ -8,13 +8,13 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "mealie.home.arpa"
-    http:
-      paths:
-      - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: mealie-prod-svc
-            port:
-              number: 9000
+    - host: "mealie.home.arpa"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: mealie-prod-svc
+                port:
+                  number: 9000
