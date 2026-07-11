@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - dispatcharr.home.arpa
-    secretName: media-prod-tls-internal
+    secretName: home-arpa-tls
   rules:
   - host: "dispatcharr.home.arpa"
     http:

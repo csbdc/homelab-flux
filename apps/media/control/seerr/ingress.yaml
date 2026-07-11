@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - seerr.home.arpa
-    secretName: media-prod-tls-internal
+    secretName: home-arpa-tls
   rules:
   - host: "seerr.home.arpa"
     http:

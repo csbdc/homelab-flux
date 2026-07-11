@@ -12,7 +12,7 @@ spec:
     - qbittorrent-0.home.arpa
     - qbittorrent-1.home.arpa
     - qbittorrent-2.home.arpa
-    secretName: media-prod-tls-internal
+    secretName: home-arpa-tls
   rules:
   - host: "qbittorrent-0.home.arpa"
     http:
