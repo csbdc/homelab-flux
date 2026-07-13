@@ -3,17 +3,11 @@ kind: Ingress
 metadata:
   name: proxied-ingress
   annotations:
-    cert-manager.io/cluster-issuer: home-ca-issuer
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
-    - hosts:
-        - sonarr.home.arpa
-        - radarr.home.arpa
-        - prowlarr.home.arpa
-        - bazarr.home.arpa
-      secretName: home-arpa-tls
+    - secretName: home-arpa-tls
   rules:
     - host: "sonarr.home.arpa"
       http:
