@@ -5,3 +5,4 @@ metadata:
 resources:
   - clusterIssuer.yaml
   - pki.yaml
+  - home-arpa-tls.yaml

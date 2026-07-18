@@ -6,7 +6,6 @@ namespace: authentik
 resources:
   - namespace.yaml
   - secrets.yaml
-  - certificate.yaml
   - postgres.yaml
   - helmRepository.yaml
   - helmRelease.yaml
