@@ -3,5 +3,6 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
+  - home-arpa-tls.yaml
   - ca-secret-store.yaml
   - ca-secret.yaml

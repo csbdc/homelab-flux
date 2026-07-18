@@ -2,6 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: home-arpa-tls
+  namespace: external-secrets
 spec:
   dnsNames:
     - "*.home.arpa"
