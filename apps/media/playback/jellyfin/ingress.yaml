@@ -9,6 +9,7 @@ spec:
   tls:
     - hosts:
         - jellyfin.home.arpa
+      secretName: home-arpa-tls
   rules:
     - host: "jellyfin.home.arpa"
       http:
