@@ -4,8 +4,10 @@ metadata:
   name: home-arpa-tls
   namespace: external-secrets
 spec:
+  commonName: "*.home.arpa"
   dnsNames:
-    - "*.home.arpa"
+  - "*.home.arpa"
+  - "home.arpa"
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer
