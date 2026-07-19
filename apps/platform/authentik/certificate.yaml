@@ -2,16 +2,20 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: home-arpa-tls
-  namespace: external-secrets
+  namespace: authentik
 spec:
   secretName: home-arpa-tls
   issuerRef:
     kind: ClusterIssuer
     name: home-ca-issuer
-  commonName: "*.home.arpa"
+  commonName: home.arpa
   dnsNames:
-    - "*.home.arpa"
-    - "home.arpa"
+    - authentik.home.arpa
+    - ldap.home.arpa
+    - sonarr.home.arpa
+    - radarr.home.arpa
+    - prowlarr.home.arpa
+    - bazarr.home.arpa
   privateKey:
     algorithm: RSA
     size: 2048

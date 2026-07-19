@@ -4,5 +4,6 @@ metadata:
   name: kustomization
 resources:
   - namespace.yaml
+  - certificate.yaml
   - helmRepository.yaml
   - helmRelease.yaml

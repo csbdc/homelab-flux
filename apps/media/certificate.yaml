@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: home-arpa-tls
+  namespace: media
+spec:
+  secretName: home-arpa-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: home-ca-issuer
+  commonName: home.arpa
+  dnsNames:
+    - jellyin.home.arpa
+    - dispatcharr.home.arpa
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth

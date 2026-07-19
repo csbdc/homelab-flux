@@ -5,6 +5,7 @@ metadata:
 namespace: authentik
 resources:
   - namespace.yaml
+  - certificate.yaml
   - secrets.yaml
   - postgres.yaml
   - helmRepository.yaml

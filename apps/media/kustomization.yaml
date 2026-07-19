@@ -6,6 +6,7 @@ namespace: media
 resources:
   - namespace.yaml
   - pvc.yaml
+  - certificate.yaml
   - ingest/ks.yaml
   - control/ks.yaml
   - playback/ks.yaml
