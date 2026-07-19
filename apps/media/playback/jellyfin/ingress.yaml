@@ -8,8 +8,8 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - "*.home.arpa"
-      secretName: home-arpa-tls
+        - "jellyfin.home.arpa"
+      secretName: home-arpa-tls-test
   rules:
     - host: "jellyfin.home.arpa"
       http:
