@@ -10,7 +10,7 @@ spec:
     name: home-ca-issuer
   commonName: home.arpa
   dnsNames:
-    - jellyin.home.arpa
+    - jellyfin.home.arpa
     - dispatcharr.home.arpa
   privateKey:
     algorithm: RSA
