@@ -38,7 +38,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-          image: docker.io/jellyfin/jellyfin
+          image: docker.io/jellyfin/jellyfin:12.0-rc2
           name: jellyfin
           envFrom:
             - configMapRef:
