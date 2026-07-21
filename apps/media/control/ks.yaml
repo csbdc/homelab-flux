@@ -11,7 +11,7 @@ spec:
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./apps/media/control/bazarr
-  prune: false
+  prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -26,7 +26,7 @@ spec:
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./apps/media/control/radarr
-  prune: false
+  prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -41,7 +41,7 @@ spec:
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./apps/media/control/sonarr
-  prune: false
+  prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -56,4 +56,4 @@ spec:
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./apps/media/control/seerr
-  prune: false
+  prune: true

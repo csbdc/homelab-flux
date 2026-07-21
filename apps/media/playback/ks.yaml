@@ -11,7 +11,7 @@ spec:
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./apps/media/playback/dispatcharr
-  prune: false
+  prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -26,4 +26,4 @@ spec:
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./apps/media/playback/jellyfin
-  prune: false
+  prune: true
