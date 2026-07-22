@@ -12,6 +12,30 @@ entries:
     attrs:
       is_superuser: false
 
+  - model: authentik_rbac.role
+    id: ldap-search-role
+    identifiers:
+      name: Home LDAP Search
+
+  - model: authentik_core.user
+    id: ldap-search-service-account
+    identifiers:
+      username: ldap-search
+    attrs:
+      name: LDAP Search Service Account
+      type: service_account
+      roles:
+        - !KeyOf ldap-search-role
+
+  - model: authentik_core.token
+    identifiers:
+      identifier: ldap-search-app-password
+    attrs:
+      intent: app_password
+      user: !KeyOf ldap-search-service-account
+      description: App password for LDAP directory searches
+      expiring: false
+
   - model: authentik_providers_ldap.ldapprovider
     id: home-ldap-provider
     identifiers:
@@ -26,6 +50,9 @@ entries:
       bind_mode: direct
       search_mode: direct
       mfa_support: false
+    permissions:
+      - permission: authentik_providers_ldap.search_full_directory
+        role: !KeyOf ldap-search-role
 
   - model: authentik_core.application
     identifiers:
