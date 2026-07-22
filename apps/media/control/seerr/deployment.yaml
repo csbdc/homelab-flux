@@ -22,7 +22,6 @@ spec:
         runAsUser: 10000
         seccompProfile:
           type: RuntimeDefault
-        readOnlyRootFilesystem: true
       automountServiceAccountToken: false
       initContainers:
         - name: merge-config
@@ -52,6 +51,38 @@ spec:
               readOnly: true
             - name: data
               mountPath: /app/config
+        - name: build-ca-bundle
+          image: alpine:3.22
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              system_bundle=""
+              for candidate in /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem; do
+                if [ -s "$candidate" ]; then
+                  system_bundle="$candidate"
+                  break
+                fi
+              done
+              [ -n "$system_bundle" ]
+              cat "$system_bundle" /home-ca/ca.crt > /ca-bundle/ca-certificates.crt
+              cp /home-ca/ca.crt /ca-bundle/home-arpa-ca.crt
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsNonRoot: false
+            runAsUser: 0
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: home-ca
+              mountPath: /home-ca
+              readOnly: true
+            - name: home-ca-bundle
+              mountPath: /ca-bundle
       containers:
         - securityContext:
             allowPrivilegeEscalation: false
@@ -65,7 +96,9 @@ spec:
               protocol: TCP
           env:
             - name: NODE_EXTRA_CA_CERTS
-              value: "/certs/home-ca.pem"
+              value: /etc/ssl/home-arpa/home-arpa-ca.crt
+            - name: SSL_CERT_FILE
+              value: /etc/ssl/home-arpa/ca-certificates.crt
           resources:
             limits:
               cpu: 500m
@@ -77,9 +110,9 @@ spec:
             - name: data
               mountPath: /app/config
               readOnly: false
-            - name: home-ca
-              mountPath: /certs/home-ca.pem
-              subPath: home-ca.pem
+            - name: home-ca-bundle
+              mountPath: /etc/ssl/home-arpa
+              readOnly: true
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -92,7 +125,9 @@ spec:
                 path: config.json
         - name: home-ca
           secret:
-            secretName: home-root-ca
+            secretName: home-arpa-tls
             items:
               - key: ca.crt
-                path: home-ca.pem
+                path: ca.crt
+        - name: home-ca-bundle
+          emptyDir: {}

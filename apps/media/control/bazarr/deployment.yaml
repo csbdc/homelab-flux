@@ -16,6 +16,39 @@ spec:
       labels:
         app: bazarr
     spec:
+      initContainers:
+        - name: build-ca-bundle
+          image: alpine:3.22
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              system_bundle=""
+              for candidate in /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem; do
+                if [ -s "$candidate" ]; then
+                  system_bundle="$candidate"
+                  break
+                fi
+              done
+              [ -n "$system_bundle" ]
+              cat "$system_bundle" /home-ca/ca.crt > /ca-bundle/ca-certificates.crt
+              cp /home-ca/ca.crt /ca-bundle/home-arpa-ca.crt
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsNonRoot: false
+            runAsUser: 0
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: home-ca
+              mountPath: /home-ca
+              readOnly: true
+            - name: home-ca-bundle
+              mountPath: /ca-bundle
       containers:
         - image: lscr.io/linuxserver/bazarr:latest
           name: bazarr
@@ -24,6 +57,12 @@ spec:
               value: "1000"
             - name: PUID
               value: "1000"
+            - name: SSL_CERT_FILE
+              value: /etc/ssl/home-arpa/ca-certificates.crt
+            - name: REQUESTS_CA_BUNDLE
+              value: /etc/ssl/home-arpa/ca-certificates.crt
+            - name: CURL_CA_BUNDLE
+              value: /etc/ssl/home-arpa/ca-certificates.crt
           ports:
             - containerPort: 6767
               name: http
@@ -36,7 +75,18 @@ spec:
               mountPath: /tv
             - name: movies-data
               mountPath: /movies
+            - name: home-ca-bundle
+              mountPath: /etc/ssl/home-arpa
+              readOnly: true
       volumes:
+        - name: home-ca
+          secret:
+            secretName: home-arpa-tls
+            items:
+              - key: ca.crt
+                path: ca.crt
+        - name: home-ca-bundle
+          emptyDir: {}
         - name: app-data
           persistentVolumeClaim:
             claimName: bazarr-prod-media-pvc
