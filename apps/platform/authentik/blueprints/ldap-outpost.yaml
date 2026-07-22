@@ -74,6 +74,13 @@ entries:
     attrs:
       group: !KeyOf media-users-group
 
+  - model: authentik_policies.policybinding
+    identifiers:
+      target: !Find [authentik_core.application, [slug, home-ldap]]
+      order: 1
+    attrs:
+      user: !KeyOf ldap-search-service-account
+
   - model: authentik_outposts.outpost
     identifiers:
       name: Home LDAP outpost
