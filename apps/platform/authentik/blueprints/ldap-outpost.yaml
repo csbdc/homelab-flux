@@ -24,8 +24,10 @@ entries:
     identifiers:
       slug: home-ldap
     attrs:
-      name: Home LDAP
+      name: Jellyfin
       provider: !KeyOf home-ldap-provider
+      meta_launch_url: https://jellyfin.home.arpa
+      group: Media
 
   - model: authentik_outposts.outpost
     identifiers:

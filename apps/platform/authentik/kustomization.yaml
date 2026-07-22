@@ -15,5 +15,6 @@ configMapGenerator:
   - name: authentik-blueprints
     files:
       - ldap-outpost.yaml=blueprints/ldap-outpost.yaml
+      - media-applications.yaml=blueprints/media-applications.yaml
 generatorOptions:
   disableNameSuffixHash: true

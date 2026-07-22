@@ -1,0 +1,109 @@
+# yaml-language-server: $schema=https://goauthentik.io/blueprints/schema.json
+version: 1
+metadata:
+  name: Media applications
+  labels:
+    blueprints.goauthentik.io/description: OIDC and proxy providers for media applications
+entries:
+  - model: authentik_providers_oauth2.oauth2provider
+    id: seerr-provider
+    identifiers:
+      name: Seerr
+    attrs:
+      authentication_flow: !Find [authentik_flows.flow, [slug, default-authentication-flow]]
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      client_type: confidential
+      client_id: seerr
+      redirect_uris:
+        - matching_mode: strict
+          url: https://seerr.home.arpa/login
+      signing_key: !Find [authentik_crypto.certificatekeypair, [name, home-arpa-tls]]
+      property_mappings:
+        - !Find [authentik_providers_oauth2.scopemapping, [scope_name, openid]]
+        - !Find [authentik_providers_oauth2.scopemapping, [scope_name, profile]]
+        - !Find [authentik_providers_oauth2.scopemapping, [scope_name, email]]
+
+  - model: authentik_core.application
+    identifiers:
+      slug: seerr
+    attrs:
+      name: Seerr
+      provider: !KeyOf seerr-provider
+      meta_launch_url: https://seerr.home.arpa
+      group: Media
+
+  - model: authentik_providers_proxy.proxyprovider
+    id: sonarr-provider
+    identifiers:
+      name: Sonarr
+    attrs:
+      authentication_flow: !Find [authentik_flows.flow, [slug, default-authentication-flow]]
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      mode: proxy
+      external_host: https://sonarr.home.arpa
+      internal_host: http://sonarr-media-svc.media.svc.cluster.local:8989
+      cookie_domain: home.arpa
+
+  - model: authentik_core.application
+    identifiers:
+      slug: sonarr
+    attrs:
+      name: Sonarr
+      provider: !KeyOf sonarr-provider
+      meta_launch_url: https://sonarr.home.arpa
+      group: Media
+
+  - model: authentik_providers_proxy.proxyprovider
+    id: radarr-provider
+    identifiers:
+      name: Radarr
+    attrs:
+      authentication_flow: !Find [authentik_flows.flow, [slug, default-authentication-flow]]
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      mode: proxy
+      external_host: https://radarr.home.arpa
+      internal_host: http://radarr-media-svc.media.svc.cluster.local:7878
+      cookie_domain: home.arpa
+
+  - model: authentik_core.application
+    identifiers:
+      slug: radarr
+    attrs:
+      name: Radarr
+      provider: !KeyOf radarr-provider
+      meta_launch_url: https://radarr.home.arpa
+      group: Media
+
+  - model: authentik_providers_proxy.proxyprovider
+    id: prowlarr-provider
+    identifiers:
+      name: Prowlarr
+    attrs:
+      authentication_flow: !Find [authentik_flows.flow, [slug, default-authentication-flow]]
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      mode: proxy
+      external_host: https://prowlarr.home.arpa
+      internal_host: http://prowlarr-media-svc.media.svc.cluster.local:9696
+      cookie_domain: home.arpa
+
+  - model: authentik_core.application
+    identifiers:
+      slug: prowlarr
+    attrs:
+      name: Prowlarr
+      provider: !KeyOf prowlarr-provider
+      meta_launch_url: https://prowlarr.home.arpa
+      group: Media
+
+  - model: authentik_outposts.outpost
+    identifiers:
+      name: authentik Embedded Outpost
+    attrs:
+      providers:
+        - !KeyOf sonarr-provider
+        - !KeyOf radarr-provider
+        - !KeyOf prowlarr-provider
