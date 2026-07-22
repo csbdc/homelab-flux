@@ -4,5 +4,5 @@ metadata:
   name: media-share
   namespace: media
 data:
-  server: 10.102.53.187
+  server: 10.106.112.172
   path: /export/pvc-4ada8496-18cf-4e7a-8544-a11549869733
