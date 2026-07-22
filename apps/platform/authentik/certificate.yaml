@@ -12,6 +12,7 @@ spec:
   dnsNames:
     - authentik.home.arpa
     - ldap.home.arpa
+    - ak-outpost-home-ldap-outpost.authentik.svc.cluster.local
     - sonarr.home.arpa
     - radarr.home.arpa
     - prowlarr.home.arpa

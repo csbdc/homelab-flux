@@ -39,13 +39,9 @@ entries:
         authentik_host: http://authentik-server.authentik.svc.cluster.local
         kubernetes_namespace: authentik
         kubernetes_replicas: 1
-        kubernetes_service_type: LoadBalancer
+        kubernetes_service_type: ClusterIP
         kubernetes_json_patches:
           service:
-            - op: add
-              path: /metadata/annotations
-              value:
-                external-dns.alpha.kubernetes.io/hostname: ldap.home.arpa
             - op: remove
               path: /spec/ports/2
             - op: remove
