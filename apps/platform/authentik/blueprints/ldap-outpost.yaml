@@ -24,6 +24,9 @@ entries:
     attrs:
       name: LDAP Search Service Account
       type: service_account
+      path: goauthentik.io/service-accounts
+      attributes:
+        goauthentik.io/user/token-expires: false
       roles:
         - !KeyOf ldap-search-role
 
