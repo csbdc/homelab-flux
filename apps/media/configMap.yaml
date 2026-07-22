@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: media-share
+  namespace: media
+data:
+  server: 10.102.53.187
+  path: /export/pvc-4ada8496-18cf-4e7a-8544-a11549869733

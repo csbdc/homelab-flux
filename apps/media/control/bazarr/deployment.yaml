@@ -42,9 +42,9 @@ spec:
             claimName: bazarr-prod-media-pvc
         - name: tv-data
           nfs:
-            server: 10.102.53.187
-            path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/tv
+            server: ${server}
+            path: ${path}/tv
         - name: movies-data
           nfs:
-            server: 10.102.53.187
-            path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/movies
+            server: ${server}
+            path: ${path}/movies

@@ -80,5 +80,5 @@ spec:
       volumes:
         - name: downloads
           nfs:
-            server: 10.102.53.187
-            path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/downloads
+            server: ${server}
+            path: ${path}/downloads

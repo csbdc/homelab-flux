@@ -12,6 +12,10 @@ spec:
     namespace: flux-system
   path: ./apps/media/playback/dispatcharr
   prune: true
+  postBuild:
+      substituteFrom:
+        - kind: ConfigMap
+          name: media-share
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -27,3 +31,7 @@ spec:
     namespace: flux-system
   path: ./apps/media/playback/jellyfin
   prune: true
+  postBuild:
+      substituteFrom:
+        - kind: ConfigMap
+          name: media-share

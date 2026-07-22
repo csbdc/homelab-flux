@@ -12,6 +12,10 @@ spec:
     namespace: flux-system
   path: ./apps/media/control/bazarr
   prune: true
+  postBuild:
+      substituteFrom:
+        - kind: ConfigMap
+          name: media-share
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -27,6 +31,10 @@ spec:
     namespace: flux-system
   path: ./apps/media/control/radarr
   prune: true
+  postBuild:
+      substituteFrom:
+        - kind: ConfigMap
+          name: media-share
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -42,6 +50,10 @@ spec:
     namespace: flux-system
   path: ./apps/media/control/sonarr
   prune: true
+  postBuild:
+      substituteFrom:
+        - kind: ConfigMap
+          name: media-share
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -57,3 +69,7 @@ spec:
     namespace: flux-system
   path: ./apps/media/control/seerr
   prune: true
+  postBuild:
+      substituteFrom:
+        - kind: ConfigMap
+          name: media-share

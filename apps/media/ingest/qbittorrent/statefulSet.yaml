@@ -5,7 +5,7 @@ metadata:
     app: qbittorrent
   name: qbittorrent-prod-media-statefulset
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: qbittorrent
@@ -61,5 +61,5 @@ spec:
           emptyDir: {}
         - name: complete
           nfs:
-            server: 10.102.53.187
-            path: /export/pvc-79312622-1dd4-49eb-9a15-197bd9338b85/downloads
+            server: ${server}
+            path: ${path}/downloads
