@@ -36,6 +36,7 @@ entries:
         - !KeyOf home-ldap-provider
       service_connection: !Find [authentik_outposts.kubernetesserviceconnection, [name, Local Kubernetes Cluster]]
       config:
+        authentik_host: http://authentik-server.authentik.svc.cluster.local
         kubernetes_namespace: authentik
         kubernetes_replicas: 1
         kubernetes_service_type: LoadBalancer
