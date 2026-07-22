@@ -5,6 +5,13 @@ metadata:
   labels:
     blueprints.goauthentik.io/description: Secure LDAP provider and Kubernetes outpost
 entries:
+  - model: authentik_core.group
+    id: media-users-group
+    identifiers:
+      name: Media-Users
+    attrs:
+      is_superuser: false
+
   - model: authentik_providers_ldap.ldapprovider
     id: home-ldap-provider
     identifiers:
@@ -28,6 +35,13 @@ entries:
       provider: !KeyOf home-ldap-provider
       meta_launch_url: https://jellyfin.home.arpa
       group: Media
+
+  - model: authentik_policies.policybinding
+    identifiers:
+      target: !Find [authentik_core.application, [slug, home-ldap]]
+      order: 0
+    attrs:
+      group: !KeyOf media-users-group
 
   - model: authentik_outposts.outpost
     identifiers:
