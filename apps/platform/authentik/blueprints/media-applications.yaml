@@ -38,6 +38,7 @@ entries:
       name: Seerr
       provider: !KeyOf seerr-provider
       meta_launch_url: https://seerr.home.arpa
+      icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/seerr.svg
       group: Media
 
   - model: authentik_providers_proxy.proxyprovider
@@ -60,6 +61,7 @@ entries:
       name: Sonarr
       provider: !KeyOf sonarr-provider
       meta_launch_url: https://sonarr.home.arpa
+      icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/sonarr.svg
       group: Media
 
   - model: authentik_providers_proxy.proxyprovider
@@ -82,6 +84,7 @@ entries:
       name: Radarr
       provider: !KeyOf radarr-provider
       meta_launch_url: https://radarr.home.arpa
+      icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/radarr.svg
       group: Media
 
   - model: authentik_providers_proxy.proxyprovider
@@ -104,6 +107,7 @@ entries:
       name: Prowlarr
       provider: !KeyOf prowlarr-provider
       meta_launch_url: https://prowlarr.home.arpa
+      icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/prowlarr.svg
       group: Media
 
   - model: authentik_outposts.outpost
