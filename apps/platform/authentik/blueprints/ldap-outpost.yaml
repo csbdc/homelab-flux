@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://goauthentik.io/blueprints/schema.json
+version: 1
+metadata:
+  name: Home LDAP outpost
+  labels:
+    blueprints.goauthentik.io/description: Secure LDAP provider and Kubernetes outpost
+entries:
+  - model: authentik_providers_ldap.ldapprovider
+    id: home-ldap-provider
+    identifiers:
+      name: Home LDAP
+    attrs:
+      authentication_flow: !Find [authentik_flows.flow, [slug, default-authentication-flow]]
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
+      base_dn: DC=home,DC=arpa
+      certificate: !Find [authentik_crypto.certificatekeypair, [name, home-arpa-tls]]
+      tls_server_name: ldap.home.arpa
+      bind_mode: direct
+      search_mode: direct
+      mfa_support: false
+
+  - model: authentik_core.application
+    identifiers:
+      slug: home-ldap
+    attrs:
+      name: Home LDAP
+      provider: !KeyOf home-ldap-provider
+
+  - model: authentik_outposts.outpost
+    identifiers:
+      name: Home LDAP outpost
+    attrs:
+      type: ldap
+      providers:
+        - !KeyOf home-ldap-provider
+      service_connection: !Find [authentik_outposts.kubernetesserviceconnection, [name, Local Kubernetes Cluster]]
+      config:
+        kubernetes_namespace: authentik
+        kubernetes_replicas: 1
+        kubernetes_service_type: LoadBalancer
+        kubernetes_json_patches:
+          service:
+            - op: add
+              path: /metadata/annotations
+              value:
+                external-dns.alpha.kubernetes.io/hostname: ldap.home.arpa
+            - op: remove
+              path: /spec/ports/2
+            - op: remove
+              path: /spec/ports/0

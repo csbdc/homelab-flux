@@ -11,3 +11,9 @@ resources:
   - helmRepository.yaml
   - helmRelease.yaml
   - ingress.yaml
+configMapGenerator:
+  - name: authentik-blueprints
+    files:
+      - ldap-outpost.yaml=blueprints/ldap-outpost.yaml
+generatorOptions:
+  disableNameSuffixHash: true

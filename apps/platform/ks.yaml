@@ -4,6 +4,7 @@ metadata:
   name: harbor
   namespace: flux-system
 spec:
+  suspend: true
   interval: 30s
   timeout: 5m
   sourceRef:
@@ -20,10 +21,15 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30s
-  timeout: 5m
+  timeout: 10m
+  dependsOn:
+    - name: cert-manager
+    - name: cloudnative-pg
+    - name: external-secrets
   sourceRef:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
   path: ./apps/platform/authentik
   prune: true
+  wait: true

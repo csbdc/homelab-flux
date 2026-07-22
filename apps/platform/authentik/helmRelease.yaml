@@ -30,13 +30,20 @@ spec:
         - name: home-arpa-tls
           secret:
             secretName: home-arpa-tls
+        - name: authentik-blueprints
+          configMap:
+            name: authentik-blueprints
       volumeMounts:
         - name: authentik-secrets
           mountPath: /authentik-secrets
         - name: authentik-postgresql
           mountPath: /authentik-postgresql
         - name: home-arpa-tls
-          mountPath: /certs
+          mountPath: /certs/home-arpa-tls
+          readOnly: true
+        - name: authentik-blueprints
+          mountPath: /blueprints/custom
+          readOnly: true
     server:
       ingress:
         annotations:
