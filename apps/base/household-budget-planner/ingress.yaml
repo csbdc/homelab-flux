@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: household-budget-planner
+  annotations:
+    cert-manager.io/cluster-issuer: home-ca-issuer
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - household-budget-planner.home.arpa
+      secretName: household-budget-planner-home-arpa-tls
+  rules:
+    - host: household-budget-planner.home.arpa
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: household-budget-planner
+                port:
+                  name: http
