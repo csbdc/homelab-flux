@@ -12,6 +12,10 @@ spec:
   dnsNames:
     - jellyfin.home.arpa
     - dispatcharr.home.arpa
+    - qbittorrent-0.home.arpa
+    - qbittorrent-1.home.arpa
+    - qbittorrent-2.home.arpa
+    - seerr.home.arpa
   privateKey:
     algorithm: RSA
     size: 2048
