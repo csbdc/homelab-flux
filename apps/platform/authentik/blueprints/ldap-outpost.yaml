@@ -86,7 +86,7 @@ entries:
       target: !Find [authentik_core.application, [slug, home-ldap]]
       order: 0
     attrs:
-      group: !KeyOf management-users-group
+      group: !KeyOf jellyfin-users-group
 
   - model: authentik_policies.policybinding
     identifiers:
@@ -94,6 +94,13 @@ entries:
       order: 1
     attrs:
       user: !KeyOf ldap-search-service-account
+
+  - model: authentik_policies.policybinding
+    identifiers:
+      target: !Find [authentik_core.application, [slug, home-ldap]]
+      order: 2
+    attrs:
+      group: !KeyOf jellyfin-admins-group
 
   - model: authentik_outposts.outpost
     identifiers:
