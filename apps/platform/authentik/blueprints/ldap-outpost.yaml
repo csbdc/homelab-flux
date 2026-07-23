@@ -12,6 +12,20 @@ entries:
     attrs:
       is_superuser: false
 
+  - model: authentik_core.group
+    id: jellyfin-users-group
+    identifiers:
+      name: JellyfinUsers
+    attrs:
+      is_superuser: false
+
+  - model: authentik_core.group
+    id: jellyfin-admins-group
+    identifiers:
+      name: JellyfinAdmins
+    attrs:
+      is_superuser: false
+
   - model: authentik_rbac.role
     id: ldap-search-role
     identifiers:
@@ -45,7 +59,7 @@ entries:
       name: Home LDAP
     attrs:
       authentication_flow: !Find [authentik_flows.flow, [slug, default-authentication-flow]]
-      authorization_flow: !Find [authentik_flows.flow, [slug, default-provider-authorization-implicit-consent]]
+      authorization_flow: !Find [authentik_flows.flow, [slug, default-authentication-flow]]
       invalidation_flow: !Find [authentik_flows.flow, [slug, default-provider-invalidation-flow]]
       base_dn: DC=home,DC=arpa
       certificate: !Find [authentik_crypto.certificatekeypair, [name, home-arpa-tls]]
