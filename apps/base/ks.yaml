@@ -1,0 +1,15 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: deposit-tracker
+  namespace: flux-system
+spec:
+  interval: 30s
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: homelab-github-flux-sync
+    namespace: flux-system
+  path: ./apps/base/deposit-tracker
+  prune: true
+  wait: true

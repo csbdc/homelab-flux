@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: deposit-tracker
+  annotations:
+    cert-manager.io/cluster-issuer: home-ca-issuer
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - deposit-tracker.home.arpa
+      secretName: deposit-tracker-home-arpa-tls
+  rules:
+    - host: deposit-tracker.home.arpa
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: deposit-tracker
+                port:
+                  name: http
