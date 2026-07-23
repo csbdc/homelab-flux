@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - household-budget-planner.home.arpa
-      secretName: household-budget-planner-home-arpa-tls
+        - budget.home.arpa
+      secretName: budget-home-arpa-tls
   rules:
-    - host: household-budget-planner.home.arpa
+    - host: budget.home.arpa
       http:
         paths:
           - path: /
