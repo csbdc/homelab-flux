@@ -27,7 +27,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: deposit-tracker
-          image: ghcr.io/csbdc/deposit-tracker:sha-d3f7c23@sha256:9650231c6f397296f20fc632b2fdab3e94394ff9f63e4fe346fc4b41bd7695c4
+          image: ghcr.io/csbdc/deposit-tracker:sha-42e0866@sha256:efeba655795ed82807c28aac6b0ae9dcda0f939cbd4d5961d45336aed3426c5b
           imagePullPolicy: IfNotPresent
           env:
             - name: DATA_DIR
