@@ -38,6 +38,8 @@ spec:
             - --port
             - "3000"
           env:
+            - name: __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
+              value: household-budget-planner.home.arpa
             - name: HOME
               value: /tmp
             - name: HOSTNAME
