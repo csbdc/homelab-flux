@@ -29,6 +29,14 @@ spec:
         - name: household-budget-planner
           image: ghcr.io/csbdc/household-budget-planner:sha-abc03a8@sha256:6bc65d020fc30f6223a6239398683a80b920c1f364cdaa7612fc5426c2f93a9c
           imagePullPolicy: IfNotPresent
+          command:
+            - /app/node_modules/.bin/vinext
+          args:
+            - dev
+            - --hostname
+            - 0.0.0.0
+            - --port
+            - "3000"
           env:
             - name: HOME
               value: /tmp
@@ -76,6 +84,12 @@ spec:
               mountPath: /app/.wrangler
             - name: tmp
               mountPath: /tmp
+            - name: miniflare-cache
+              mountPath: /app/node_modules/.mf
+            - name: vite-cache
+              mountPath: /app/node_modules/.vite
+            - name: vite-temp
+              mountPath: /app/node_modules/.vite-temp
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -84,3 +98,15 @@ spec:
           emptyDir:
             medium: Memory
             sizeLimit: 64Mi
+        - name: miniflare-cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: 64Mi
+        - name: vite-cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: 128Mi
+        - name: vite-temp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Mi
