@@ -6,9 +6,9 @@ metadata:
     blueprints.goauthentik.io/description: OIDC and proxy providers for media applications
 entries:
   - model: authentik_core.group
-    id: media-users-group
+    id: management-users-group
     identifiers:
-      name: Media-Users
+      name: ManagementUsers
     attrs:
       is_superuser: false
 
@@ -124,25 +124,25 @@ entries:
       target: !Find [authentik_core.application, [slug, seerr]]
       order: 0
     attrs:
-      group: !KeyOf media-users-group
+      group: !KeyOf management-users-group
 
   - model: authentik_policies.policybinding
     identifiers:
       target: !Find [authentik_core.application, [slug, sonarr]]
       order: 0
     attrs:
-      group: !KeyOf media-users-group
+      group: !KeyOf management-users-group
 
   - model: authentik_policies.policybinding
     identifiers:
       target: !Find [authentik_core.application, [slug, radarr]]
       order: 0
     attrs:
-      group: !KeyOf media-users-group
+      group: !KeyOf management-users-group
 
   - model: authentik_policies.policybinding
     identifiers:
       target: !Find [authentik_core.application, [slug, prowlarr]]
       order: 0
     attrs:
-      group: !KeyOf media-users-group
+      group: !KeyOf management-users-group
