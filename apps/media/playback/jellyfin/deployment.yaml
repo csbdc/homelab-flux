@@ -71,7 +71,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-          image: docker.io/jellyfin/jellyfin:12.0-rc2
+          image: docker.io/jellyfin/jellyfin
           name: jellyfin
           env:
             - name: SSL_CERT_FILE
