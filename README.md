@@ -16,6 +16,19 @@ These applications provide personalized services and media consumption features:
 
 ### 🛠️ Infrastructure & Platform Services (Backend)
 These services manage the underlying infrastructure and platform capabilities:
+
+**Core Infrastructure Addons:**
+These components handle networking, storage, and security within the cluster:
+*   **Cert-Manager**: Certificate management for TLS (`apps/infrastructure/controllers/cert-manager`)
+*   **External Secrets**: Securely inject secrets from external sources (`apps/infrastructure/controllers/external-secrets`)
+*   **CloudNativePG**: Managed PostgreSQL database service (`apps/infrastructure/controllers/cloudnative-pg`)
+*   **NGINX Ingress**: Load balancing and ingress controller for services (`apps/infrastructure/networking/nginx-ingress`)
+*   **Metallb**: Network load balancer provider (`apps/infrastructure/networking/metallb`)
+*   **External DNS**: Automated external DNS record management (`apps/infrastructure/networking/external-dns`)
+*   **Longhorn**: Distributed block storage solution (`apps/infrastructure/storage/longhorn`)
+*   **NFS Server Provisioner**: Network file system provisioner (`apps/infrastructure/storage/nfs-server-provisioner`)
+
+**General Platform Utilities:**
 *   **Authentik**: Identity and access management system (`apps/authentik`)
 *   **Harbor**: Private container registry (`apps/harbor`)
 *   **Kube-Prometheus-Stack / Observability**: Monitoring and logging stack (`apps/{kube-prometheus-stack,observability}`)
