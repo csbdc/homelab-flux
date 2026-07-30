@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tdarr-prod-media-svc
+spec:
+  selector:
+    app: tdarr
+  ports:
+    - name: http
+      port: 8265
+      protocol: TCP
+      targetPort: http

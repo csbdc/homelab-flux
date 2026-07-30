@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tdarr
+  name: deployment
+spec:
+  selector:
+    matchLabels:
+      app: tdarr
+  template:
+    metadata:
+      labels:
+        app: tdarr
+    spec:
+      containers:
+        - name: arr-app
+          image: ghcr.io/haveagitgat/tdarr
+          ports:
+            - containerPort: 8265
+              name: http
+              protocol: TCP
+            - containerPort: 8266
+              name: server
+              protocol: TCP
