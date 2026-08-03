@@ -27,7 +27,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: household-budget-planner
-          image: ghcr.io/csbdc/household-budget-planner:sha-6322907@sha256:3930d2f41bee63b886011398aa44068e49017250630bd62fb803f8e94edc27c0
+          image: ghcr.io/csbdc/household-budget-planner:latest
           imagePullPolicy: IfNotPresent
           command:
             - /app/node_modules/.bin/vinext
