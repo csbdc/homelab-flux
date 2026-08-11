@@ -1,0 +1,27 @@
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata:
+  name: allow-volume-creation-with-degraded-availability
+  namespace: longhorn-system
+value: "false"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata:
+  name: offline-replica-rebuilding
+  namespace: longhorn-system
+value: "true"
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata:
+  name: replica-auto-balance
+  namespace: longhorn-system
+value: least-effort
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata:
+  name: replica-replenishment-wait-interval
+  namespace: longhorn-system
+value: "0"

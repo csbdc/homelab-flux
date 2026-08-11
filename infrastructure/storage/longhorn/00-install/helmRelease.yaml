@@ -17,6 +17,10 @@ spec:
         namespace: default
       interval: 10m
   values:
+    defaultSettings:
+      allowVolumeCreationWithDegradedAvailability: false
+      offlineReplicaRebuilding: true
+      replicaAutoBalance: least-effort
     ingress:
       enabled: true
       ingressClassName: nginx
