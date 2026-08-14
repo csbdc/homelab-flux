@@ -4,6 +4,6 @@ metadata:
   name: nfd
   namespace: default
 spec:
-  interval: 1m
   type: "oci"
-  url: oci://registry.k8s.io/nfd/charts
+  interval: 1m
+  url: oci://registry.k8s.io/nfd/charts/node-feature-discovery
