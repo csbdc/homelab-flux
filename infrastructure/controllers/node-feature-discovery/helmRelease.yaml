@@ -18,3 +18,8 @@ spec:
         namespace: default
       interval: 10m
       version: 0.19.0
+    values:
+      worker:
+        podSecurityContext:
+          seccompProfile:
+            type: RuntimeDefault
