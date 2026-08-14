@@ -3,5 +3,4 @@ kind: Kustomization
 metadata:
   name: kustomization
 resources:
-  - ./00-install
-  - ./10-config
+  - gpuDevicePlugin.yaml

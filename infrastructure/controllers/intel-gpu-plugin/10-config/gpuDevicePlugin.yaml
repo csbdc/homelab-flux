@@ -1,0 +1,12 @@
+apiVersion: deviceplugin.intel.com/v1
+kind: GpuDevicePlugin
+metadata:
+  name: gpu
+  namespace: intel
+spec:
+  image: intel/intel-gpu-plugin:0.36.0
+  sharedDevNum: 1
+  logLevel: 4
+  enableMonitoring: true
+  nodeSelector:
+    intel.feature.node.kubernetes.io/gpu: "true"
