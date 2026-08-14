@@ -55,5 +55,5 @@ spec:
     kind: GitRepository
     name: homelab-github-flux-sync
     namespace: flux-system
-  path: ./infrastructure/controllers/nfd
+  path: ./infrastructure/controllers/node-feature-discovery
   prune: false
