@@ -11,10 +11,10 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: nfd
-      version: 0.19.0
+      chart: node-feature-discovery
       sourceRef:
         kind: HelmRepository
         name: nfd
         namespace: default
       interval: 10m
+      version: 0.19.0
