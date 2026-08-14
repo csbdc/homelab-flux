@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nfd
+  namespace: default
+spec:
+  suspend: false
+  install:
+    createNamespace: true
+  targetNamespace: nfd
+  interval: 10m
+  chart:
+    spec:
+      chart: nfd
+      sourceRef:
+        kind: HelmRepository
+        name: nfd
+        namespace: default
+      interval: 10m
