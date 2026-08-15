@@ -94,7 +94,11 @@ spec:
             - containerPort: 9191
               name: http
               protocol: TCP
-          resources: {}
+          resources:
+            limits:
+              gpu.intel.com/i915: "1"
+            requests:
+              gpu.intel.com/i915: "1"
           volumeMounts:
             - name: data
               mountPath: /data
