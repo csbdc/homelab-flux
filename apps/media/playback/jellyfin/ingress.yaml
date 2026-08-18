@@ -21,3 +21,28 @@ spec:
                 name: jellyfin-prod-media-svc
                 port:
                   number: 8096
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin-prod-media-ingress-external
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "cloudflare-cluster-issuer"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - jellyfin.cbxon.co.uk
+      secretName: cbxon-tls
+  rules:
+    - host: "jellyfin.cbxon.co.uk"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: jellyfin-prod-media-svc
+                port:
+                  number: 8096
