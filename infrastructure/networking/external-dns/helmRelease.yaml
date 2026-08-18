@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: external-dns
+  name: external-dns-unifi
   namespace: default
 spec:
   install:
@@ -52,5 +52,45 @@ spec:
     txtPrefix: k8s.main.%{record_type}-
     domainFilters:
       - home.arpa # replace with your domain
+    serviceMonitor:
+      enabled: true
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-dns-cloudflare
+  namespace: default
+spec:
+  install:
+    createNamespace: true
+  targetNamespace: external-dns
+  interval: 10m
+  chart:
+    spec:
+      chart: external-dns
+      sourceRef:
+        kind: HelmRepository
+        name: external-dns
+        namespace: default
+      interval: 10m
+  values:
+    fullnameOverride: external-dns-cloudflare
+    provider:
+      name: cloudflare
+    env:
+      - name: CF_API_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: cloudflare-api-key
+            key: apiKey
+    triggerLoopOnEvent: true
+    policy: sync
+    sources:
+      - ingress
+    txtOwnerId: main
+    txtPrefix: k8s.main.%{record_type}-
+    domainFilters:
+      - cbxon.co.uk
+      - csbdc.co.uk
     serviceMonitor:
       enabled: true
