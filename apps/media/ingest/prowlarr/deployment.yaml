@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: arr-app
-          image: ghcr.io/csbdc/prowlarr:main
+          image: ghcr.io/csbdc/prowlarr-rootless:main
           livenessProbe:
             httpGet:
               port: 9696

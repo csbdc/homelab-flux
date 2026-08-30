@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: arr-app
-          image: ghcr.io/csbdc/sonarr:main
+          image: ghcr.io/csbdc/sonarr-rootless:main
           livenessProbe:
             httpGet:
               port: 8989

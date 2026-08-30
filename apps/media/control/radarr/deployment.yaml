@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: arr-app
-          image: ghcr.io/csbdc/radarr:main
+          image: ghcr.io/csbdc/radarr-rootless:main
           livenessProbe:
             httpGet:
               port: 7878
