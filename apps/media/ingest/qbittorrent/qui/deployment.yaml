@@ -33,4 +33,32 @@ spec:
           - containerPort: 7476
             name: http
             protocol: TCP
+        env:
+          - name: QUI__SESSION_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: qui-sessionSecret
+                key: QUI__SESSION_SECRET
+          - name: QUI__DATABASE_ENGINE
+            value: postgres
+          - name: QUI__DATABASE_HOST
+            valueFrom:
+              secretKeyRef:
+                name: qbittorrent-prod-pg-app
+                key: host
+          - name: QUI__DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+                name: qbittorrent-prod-pg-app
+                key: username
+          - name: QUI__DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: qbittorrent-prod-pg-app
+                key: password
+          - name: QUI__DATABASE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: qbittorrent-prod-pg-app
+                key: dbname
 status: {}
