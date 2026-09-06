@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: qui-prod-media-svc
 spec:
+  selector:
+    app: qui-deployment
   ports:
     - port: 7476
       targetPort: http
