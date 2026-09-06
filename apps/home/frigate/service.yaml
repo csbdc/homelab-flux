@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frigate-service
+spec:
+  selector:
+    app: frigate-deployment
+  ports:
+    - name: http
+      port: 8971
+      protocol: TCP
+      targetPort: http

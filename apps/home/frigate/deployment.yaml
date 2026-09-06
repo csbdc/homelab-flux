@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frigate-deployment
+  name: frigate-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frigate-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: frigate-deployment
+    spec:
+      containers:
+      - image: ghcr.io/blakeblackshear/frigate
+        name: frigate
+        resources: {}
+        ports:
+          - containerPort: 8971
+            name: http
+            protocol: TCP
+          - containerPort: 8554
+            name: rtsp
+            protocol: TCP
+          - containerPort: 8555
+            name: webrtc-tcp
+            protocol: TCP
+          - containerPort: 8555
+            name: webrtc-udp
+            protocol: UDP
+status: {}

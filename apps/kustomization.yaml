@@ -8,3 +8,4 @@ resources:
   - observability/ks.yaml
   # - game/ks.yaml
   - ./media
+  - home/ks.yaml
