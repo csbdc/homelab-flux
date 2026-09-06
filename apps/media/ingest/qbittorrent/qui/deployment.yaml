@@ -38,7 +38,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: qui-sessionSecret
-                key: QUI__SESSION_SECRET
+                key: sessionSecret
           - name: QUI__DATABASE_ENGINE
             value: postgres
           - name: QUI__DATABASE_HOST
