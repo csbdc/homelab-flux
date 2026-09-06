@@ -4,5 +4,7 @@ metadata:
   name: kustomization
 namespace: media
 resources:
-  - qui
-  - qbittorrent
+  - service.yaml
+  - ingress.yaml
+  - postgres.yaml
+  - deployment.yaml

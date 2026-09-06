@@ -4,5 +4,6 @@ metadata:
   name: kustomization
 namespace: media
 resources:
-  - qui
-  - qbittorrent
+  - service.yaml
+  - configMap.yaml
+  - statefulSet.yaml

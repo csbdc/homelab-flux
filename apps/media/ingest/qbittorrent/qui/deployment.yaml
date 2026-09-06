@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: qui-deployment
+  name: qui-deployment
+  namespace: media
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: qui-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: qui-deployment
+    spec:
+      securityContext:
+        fsGroup: 10000
+        runAsGroup: 10000
+        runAsNonRoot: true
+        runAsUser: 10000
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
+      containers:
+      - image: ghcr.io/autobrr/qui:latest
+        name: qui
+        resources: {}
+        ports:
+          - containerPort: 7476
+            name: http
+            protocol: TCP
+status: {}
